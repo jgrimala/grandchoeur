@@ -1,0 +1,42 @@
+/**
+ * Header.scss
+ * components\layout\header\Header.scss
+ */
+
+.header {
+  background-color: #333;
+  .nav-list {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0;
+    padding: 30px;
+  }
+
+  .nav-item {
+    margin: 0;
+    padding-right: 30px;
+
+    .nav-link,
+    button {
+      // Apply styles to both links and buttons
+      padding: 0;
+      margin: 0;
+      background: none; // Remove any default background from buttons
+      border: none; // Remove any default borders from buttons
+      color: rgb(153, 153, 153); // Same text color
+      text-decoration: none; // Ensure no underline
+      cursor: pointer; // Cursor pointer like a link
+
+      &:hover {
+        color: #fff; // Change color on hover
+        text-decoration: underline; // Underline on hover like links
+      }
+
+      &:focus {
+        outline: none; // Remove focus outline from buttons for aesthetic purposes
+      }
+    }
+  }
+}
