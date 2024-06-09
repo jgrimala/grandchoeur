@@ -1,6 +1,6 @@
 {
     "name": "grandchoeur/gcbackend",
-    "description": "Backend for the GrandChoeur project.",
+    "description": "Backend for the Grandchoeur project.",
     "type": "project",
     "require": {
         "php": "^7.4 || ^8.0",
