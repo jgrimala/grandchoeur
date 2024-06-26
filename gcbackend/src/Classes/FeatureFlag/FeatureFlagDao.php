@@ -20,7 +20,8 @@ use Config\DatabaseConnection;
  * @since: 2024-04-20 14:36:04
  */
 
-class FeatureFlagDao {
+class FeatureFlagDao
+{
     private $db;
 
     public function __construct()
@@ -46,18 +47,28 @@ class FeatureFlagDao {
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public function getFeatureFlagForUser($userId, $flagName)
+    {
+        $query = "SELECT is_enabled FROM feature_flags WHERE user_id = ? AND feature_name = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$userId, $flagName]);
+
+        return $stmt->fetch(\PDO::FETCH_ASSOC)['is_enabled'] ?? false;
+    }
+
     public function createFeatureFlag($data)
     {
         try {
-            $query = "INSERT INTO feature_flags (feature_name, is_enabled, created_at, expiry_date, created_by, description) VALUES (?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO feature_flags (user_id, feature_name, is_enabled, created_at, expiry_date, created_by, description) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
 
-            $stmt->bindParam(1, $data['feature_name']);
-            $stmt->bindParam(2, $data['is_enabled']);
-            $stmt->bindParam(3, $data['created_at']);
-            $stmt->bindParam(4, $data['expiry_date']);
-            $stmt->bindParam(5, $data['created_by']);
-            $stmt->bindParam(6, $data['description']);
+            $stmt->bindParam(1, $data['user_id']);
+            $stmt->bindParam(2, $data['feature_name']);
+            $stmt->bindParam(3, $data['is_enabled']);
+            $stmt->bindParam(4, $data['created_at']);
+            $stmt->bindParam(5, $data['expiry_date']);
+            $stmt->bindParam(6, $data['created_by']);
+            $stmt->bindParam(7, $data['description']);
 
             $stmt->execute();
             $featureFlagId = $this->db->getConnection()->lastInsertId();
@@ -69,29 +80,29 @@ class FeatureFlagDao {
     }
 
     public function updateFeatureFlag($id, $data)
-{
-    try {
-        // Ensure only the is_enabled field is updated
-        $query = "UPDATE feature_flags SET is_enabled = ? WHERE id = ?";
-        $stmt = $this->db->prepare($query);
+    {
+        try {
+            // Ensure only the is_enabled field is updated
+            $query = "UPDATE feature_flags SET is_enabled = ? WHERE id = ?";
+            $stmt = $this->db->prepare($query);
 
-        // Convert is_enabled to a boolean value appropriate for database update
-        $isEnabled = filter_var($data['is_enabled'], FILTER_VALIDATE_BOOLEAN);
+            // Convert is_enabled to a boolean value appropriate for database update
+            $isEnabled = filter_var($data['is_enabled'], FILTER_VALIDATE_BOOLEAN);
 
-        // Binding parameters for the SQL query
-        $stmt->bindParam(1, $isEnabled, \PDO::PARAM_BOOL); // Ensure the value is bound as a boolean
-        $stmt->bindParam(2, $id);
+            // Binding parameters for the SQL query
+            $stmt->bindParam(1, $isEnabled, \PDO::PARAM_BOOL); // Ensure the value is bound as a boolean
+            $stmt->bindParam(2, $id);
 
-        // Execute the update statement
-        $stmt->execute();
+            // Execute the update statement
+            $stmt->execute();
 
-        // Return the updated feature flag by fetching it from the database
-        return $this->getFeatureFlagById($id);
-    } catch (\PDOException $e) {
-        // Return error details if the update fails
-        return ['status' => "Feature flag update failed", 'message' => $e->getMessage()];
+            // Return the updated feature flag by fetching it from the database
+            return $this->getFeatureFlagById($id);
+        } catch (\PDOException $e) {
+            // Return error details if the update fails
+            return ['status' => "Feature flag update failed", 'message' => $e->getMessage()];
+        }
     }
-}
 
     public function deleteFeatureFlag($id)
     {
@@ -105,6 +116,23 @@ class FeatureFlagDao {
             return ['status' => 'Feature flag deleted successfully'];
         } catch (\PDOException $e) {
             return ['status' => "Feature flag deletion failed", 'message' => $e->getMessage()];
+        }
+    }
+
+    public function updateFeatureFlagByUserAndName($userId, $featureName, $data)
+    {
+        try {
+            $query = "UPDATE feature_flags SET is_enabled = ?, created_at = ? WHERE user_id = ? AND feature_name = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(1, $data['is_enabled']);
+            $stmt->bindParam(2, $data['created_at']);
+            $stmt->bindParam(3, $userId);
+            $stmt->bindParam(4, $featureName);
+
+            $stmt->execute();
+            return $this->getFeatureFlagForUser($userId, $featureName);
+        } catch (\PDOException $e) {
+            return ['status' => "Feature flag update failed", 'message' => $e->getMessage()];
         }
     }
 }

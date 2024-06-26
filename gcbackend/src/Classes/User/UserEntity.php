@@ -26,9 +26,7 @@ class UserEntity extends Entity
     protected $id;
     protected $username;
     protected $email;
-    protected $password_hash;
-    protected $first_name;
-    protected $last_name;
+    protected $full_name;
     protected $is_admin;
     protected $birthdate;
     protected $created_at;

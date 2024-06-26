@@ -4,29 +4,18 @@
  * FeatureFlagController.php
  * Classes\FeatureFlag\FeatureFlagController.php
  */
-
 namespace Classes\FeatureFlag;
 
 use Classes\FeatureFlag\FeatureFlagDao;
-use Service\ApiResponder; 
-
-/**
- * FeatureFlagController()
- *
- * Description of the class
- *
- * @author: Julie Grimala
- * @version: 1.0
- * @since: 2024-04-20 14:36:39
- */
+use Service\ApiResponder;
 
 class FeatureFlagController {
     private $featureFlagDao; // Feature Flag Data Access Object
     private $responder; // API Responder
 
-    public function __construct()
+    public function __construct($db)
     {
-        $this->featureFlagDao = new FeatureFlagDao();
+        $this->featureFlagDao = new FeatureFlagDao($db);
         $this->responder = new ApiResponder();
     }
 
@@ -56,6 +45,13 @@ class FeatureFlagController {
         }
     }
 
+    // Method to get a user-specific feature flag by feature name
+    public function getFeatureFlagForUser($userId, $flagName)
+    {
+        $flagValue = $this->featureFlagDao->getFeatureFlagForUser($userId, $flagName);
+        $this->sendJsonResponse(['flag_value' => $flagValue]);
+    }
+
     // Method to create a new feature flag
     public function createFeatureFlag()
     {
@@ -71,15 +67,15 @@ class FeatureFlagController {
     {
         $data = json_decode(file_get_contents('php://input'), true);
         $flag = $this->featureFlagDao->getFeatureFlagById($id);
-    
+
         if ($flag) {
             // Update the 'is_enabled' property only if it's included in the input data
             if (isset($data['is_enabled'])) {
                 $flag['is_enabled'] = filter_var($data['is_enabled'], FILTER_VALIDATE_BOOLEAN); // Ensure the value is treated as a boolean
-    
+
                 // Save the updated feature flag
                 $result = $this->featureFlagDao->updateFeatureFlag($id, $flag);
-                
+
                 // Return the updated feature flag data
                 $this->sendJsonResponse($flag);
             } else {
@@ -91,18 +87,34 @@ class FeatureFlagController {
         }
     }
 
-
-
     // Method to delete a feature flag
     public function deleteFeatureFlag($id)
     {
         $flag = $this->featureFlagDao->getFeatureFlagById($id);
-        
+
         if ($flag) {
             $this->featureFlagDao->deleteFeatureFlag($id);
             $this->sendJsonResponse(['success' => 'Feature flag with Id ' . $id . ' was deleted successfully']);
         } else {
             $this->sendJsonResponse(['error' => 'Feature flag not found'], 404);
+        }
+    }
+
+    public function createOrUpdateFeatureFlag()
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+        if (isset($data['user_id'], $data['feature_name'])) {
+            $existingFlag = $this->featureFlagDao->getFeatureFlagForUser($data['user_id'], $data['feature_name']);
+            if ($existingFlag !== null) {
+                // Update existing feature flag
+                $result = $this->featureFlagDao->updateFeatureFlagByUserAndName($data['user_id'], $data['feature_name'], $data);
+            } else {
+                // Create new feature flag
+                $result = $this->featureFlagDao->createFeatureFlag($data);
+            }
+            $this->sendJsonResponse($result);
+        } else {
+            $this->sendJsonResponse(['error' => 'Invalid data'], 400);
         }
     }
 }

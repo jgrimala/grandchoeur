@@ -9,26 +9,19 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   
   const login = async (credentials) => {
-    //console.log('credentials:', credentials);
     try {
       const API_BASE_URL = process.env.REACT_APP_API_URL;
-      console.log('API_BASE_URL:', API_BASE_URL);
       const response = await axios.post(`${API_BASE_URL}/login`, credentials);
-      console.log(response.data); // Add this line
       if (response.data.success) {
-        // Assuming your server responds with { success: true, data: { user: {...}, token: "..." } }
         setUser(response.data.data.user); // Save user details to state
         navigate('/admin');  // Use history to navigate
-        // Optionally redirect user or handle the login success scenario
       } else {
-        // Handle any case where success is false
         throw new Error(
           response.data.message || "Login failed with no success flag."
         );
       }
     } catch (error) {
       console.error("Login error:", error);
-      // More robust error handling
       const errorMessage =
         error.response && error.response.data && error.response.data.message
           ? error.response.data.message
@@ -39,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    //.removeItem("token"); // Remove the token from localStorage
+    // Remove the token from localStorage if necessary
   };
 
   return (
@@ -50,3 +43,5 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
+
+export { AuthContext }; // Export AuthContext directly
