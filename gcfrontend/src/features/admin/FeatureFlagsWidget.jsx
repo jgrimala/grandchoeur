@@ -19,7 +19,7 @@ const FeatureFlagsWidget = () => {
     const loadFeatureFlags = async () => {
         try {
             const data = await fetchFeatureFlags();
-            console.log("Received data:", data);  // Ensure the data structure
+            //console.log("Received data:", data);  // Ensure the data structure
             setFlags(data);
             setLoading(false);
         } catch (error) {
@@ -30,17 +30,11 @@ const FeatureFlagsWidget = () => {
 
     const handleToggle = async (id, isEnabled) => {
         try {
-            // Update the feature flag on the server
-            await updateFeatureFlagEnabledStatus(id, { isEnabled: !isEnabled });
-    
-            // Update the local state
-            setFlags(flags.map(flag => {
-                if (flag.id === id) {
-                    // Toggle the 'is_enabled' property
-                    return { ...flag, is_enabled: !isEnabled };
-                }
-                return flag;
-            }));
+            console.log("Toggling feature flag:", id, { is_enabled: !isEnabled });
+            const updatedFlag = await updateFeatureFlagEnabledStatus(id, !isEnabled);
+            console.log("Updated feature flag response:", updatedFlag);
+
+            setFlags(flags.map(flag => flag.id === id ? updatedFlag : flag));
         } catch (error) {
             console.error('Failed to toggle feature flag:', error);
         }
@@ -67,9 +61,9 @@ const FeatureFlagsWidget = () => {
                     <span>{flag.description}</span>
                     <span>Created By: {flag.created_by || "Unknown"}</span>
                     <ToggleSwitch 
-                          id={`toggle-${flag.id}`} 
-                          checked={flag.is_enabled === 1} // Check if is_enabled is truthy
-                          onChange={() => handleToggle(flag.id, flag.is_enabled === 1)}
+                        id={`toggle-${flag.id}`} 
+                        checked={flag.is_enabled} 
+                        onChange={(newChecked) => handleToggle(flag.id, flag.is_enabled)}
                     />
                       <button onClick={() => handleDelete(flag.id)}>Delete</button>
                 </div>

@@ -23,7 +23,7 @@ class FeatureFlagController {
     private function sendJsonResponse($data, $status = 200)
     {
         header('Content-Type: application/json');
-        http_response_code($status); // Set the HTTP response code
+        http_response_code($status);
         echo json_encode($data, JSON_PRETTY_PRINT);
     }
 
@@ -66,20 +66,18 @@ class FeatureFlagController {
     public function updateFeatureFlag($id)
     {
         $data = json_decode(file_get_contents('php://input'), true);
+        error_log("Received data: " . print_r($data, true));
         $flag = $this->featureFlagDao->getFeatureFlagById($id);
 
         if ($flag) {
-            // Update the 'is_enabled' property only if it's included in the input data
             if (isset($data['is_enabled'])) {
-                $flag['is_enabled'] = filter_var($data['is_enabled'], FILTER_VALIDATE_BOOLEAN); // Ensure the value is treated as a boolean
+                $flag['is_enabled'] = filter_var($data['is_enabled'], FILTER_VALIDATE_BOOLEAN);
+                error_log("Updated flag: " . print_r($flag, true));
 
-                // Save the updated feature flag
                 $result = $this->featureFlagDao->updateFeatureFlag($id, $flag);
 
-                // Return the updated feature flag data
                 $this->sendJsonResponse($flag);
             } else {
-                // No relevant data to update
                 $this->sendJsonResponse(['error' => 'No update data provided for is_enabled property'], 400);
             }
         } else {

@@ -1,2 +1,0 @@
-<?php
-namespace Classes\Word;

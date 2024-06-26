@@ -5,7 +5,7 @@ export const fetchFeatureFlags = async () => {
     try {
         const API_BASE_URL = process.env.REACT_APP_API_URL;
         const response = await axios.get(`${API_BASE_URL}/featureflags`);
-        console.log("Received data:", response.data);
+        //console.log("Received data:", response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching feature flags:', error);
@@ -27,11 +27,11 @@ export const addFeatureFlag = async (flag) => {
 
 // Update an existing feature flag
 export const updateFeatureFlagEnabledStatus = async (id, isEnabled) => {
-    console.log("Updating feature flag:", id, isEnabled);
+    console.log("Updating feature flag:", id, { is_enabled: isEnabled }); // Log the payload
     try {
         const API_BASE_URL = process.env.REACT_APP_API_URL;
         const response = await axios.put(`${API_BASE_URL}/featureflag/${id}`, { is_enabled: isEnabled });
-        console.log("Updated feature flag:", response.data);
+        console.log("Updated feature flag response:", response.data); // Log the response
         return response.data;
     } catch (error) {
         console.error('Error updating feature flag enabled status:', error);

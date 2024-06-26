@@ -82,24 +82,19 @@ class FeatureFlagDao
     public function updateFeatureFlag($id, $data)
     {
         try {
-            // Ensure only the is_enabled field is updated
             $query = "UPDATE feature_flags SET is_enabled = ? WHERE id = ?";
             $stmt = $this->db->prepare($query);
 
-            // Convert is_enabled to a boolean value appropriate for database update
             $isEnabled = filter_var($data['is_enabled'], FILTER_VALIDATE_BOOLEAN);
+            error_log("is_enabled value in DAO: " . print_r($isEnabled, true));
 
-            // Binding parameters for the SQL query
-            $stmt->bindParam(1, $isEnabled, \PDO::PARAM_BOOL); // Ensure the value is bound as a boolean
+            $stmt->bindParam(1, $isEnabled, \PDO::PARAM_BOOL);
             $stmt->bindParam(2, $id);
 
-            // Execute the update statement
             $stmt->execute();
 
-            // Return the updated feature flag by fetching it from the database
             return $this->getFeatureFlagById($id);
         } catch (\PDOException $e) {
-            // Return error details if the update fails
             return ['status' => "Feature flag update failed", 'message' => $e->getMessage()];
         }
     }
