@@ -12,6 +12,7 @@ use \Firebase\JWT\JWT;
 use Service\ApiResponder;
 use Service\AuthenticationService;
 use Middleware\AuthTokenMiddleware;
+
 /**
  * UserController()
  *
@@ -46,13 +47,13 @@ class UserController
 		echo json_encode($data, JSON_PRETTY_PRINT);
 	}
 
-    /**
-     * Handle user login, delegate auth to AuthenticationService.
-     *
-     * @param string $username
-     * @param string $password
-     * @return string|null JWT token or null if authentication fails.
-     */
+	/**
+	 * Handle user login, delegate auth to AuthenticationService.
+	 *
+	 * @param string $username
+	 * @param string $password
+	 * @return string|null JWT token or null if authentication fails.
+	 */
 	public function login($username, $password)
 	{
 		$content = file_get_contents('php://input');
@@ -92,15 +93,16 @@ class UserController
 		$this->sendJsonResponse($o_user);
 	}
 
-    // Method to get a user by ID
+	// Method to get a user by ID
 	public function getUser($id)
 	{
 		$o_user = $this->userDao->getUserById($id);
 		$this->sendJsonResponse($o_user);
 	}
 
-    // Method to create a new user
-	public function createUser() {
+	// Method to create a new user
+	public function createUser()
+	{
 		$content = file_get_contents('php://input');
 		$data = json_decode($content, true);
 		// Validate and sanitize $postData here as necessary
@@ -110,7 +112,7 @@ class UserController
 	}
 
 
-    // Method to update a user
+	// Method to update a user
 	public function updateUser($id)
 	{
 		// Validate and sanitize the input data
@@ -118,7 +120,7 @@ class UserController
 		$user = $this->userDao->getUserById($id);
 
 		// Check if the user exists
-		if($user) {
+		if ($user) {
 			// Process the updated user data or return a response
 			$this->userDao->updateUser($id, $data);
 			$this->getUser($id);
@@ -128,13 +130,13 @@ class UserController
 		}
 	}
 
-    // Method to delete a user
+	// Method to delete a user
 	public function deleteUser($id)
 	{
 		$user = $this->userDao->getUserById($id);
 
 		// Check if the user exists
-		if($user){
+		if ($user) {
 			$this->userDao->deleteUser($id);
 			$this->sendJsonResponse(['success' => 'User with Id ' . $id . ' was deleted successfully']);
 		} else {

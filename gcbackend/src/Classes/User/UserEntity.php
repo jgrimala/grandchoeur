@@ -8,6 +8,7 @@
 namespace Classes\User;
 
 use Utilities\Entity;
+
 /**
  * UserEntity()
  *
@@ -23,22 +24,22 @@ use Utilities\Entity;
 
 class UserEntity extends Entity
 {
-    protected $id;
-    protected $username;
-    protected $email;
-    protected $full_name;
-    protected $is_admin;
-    protected $birthdate;
-    protected $created_at;
-    protected $updated_at;
+	protected $id;
+	protected $username;
+	protected $email;
+	protected $full_name;
+	protected $is_admin;
+	protected $birthdate;
+	protected $created_at;
+	protected $updated_at;
 
-    public function __construct(array $data = null)
-    {
-        if ($data) {
-            $this->hydrate($data);
-        }
-    }
+	public function __construct(array $data = null)
+	{
+		if ($data) {
+			$this->hydrate($data);
+		}
+	}
 
-   
-    // Other methods related to the User entity if needed
+
+	// Other methods related to the User entity if needed
 }

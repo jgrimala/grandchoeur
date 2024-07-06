@@ -24,19 +24,18 @@ use Utilities\Entity;
 
 class FeatureFlagEntity extends Entity
 {
-    protected $id;
-    protected $feature_name;
-    protected $is_enabled;
-    protected $created_at;
-    protected $expiry_date;
-    protected $created_by;
-    protected $description;
+	protected $id;
+	protected $feature_name;
+	protected $is_enabled;
+	protected $created_at;
+	protected $expiry_date;
+	protected $created_by;
+	protected $description;
 
-    public function __construct(array $data = null)
-    {
-        if ($data) {
-            $this->hydrate($data);
-        }
-    }
+	public function __construct(array $data = null)
+	{
+		if ($data) {
+			$this->hydrate($data);
+		}
+	}
 }
-

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 /**
  * Navbar.jsx
@@ -6,11 +6,7 @@ import React from 'react'
  */
 
 const Navbar = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+	return <div></div>;
+};
 
-export default Navbar
+export default Navbar;

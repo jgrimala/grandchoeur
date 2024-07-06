@@ -28,22 +28,23 @@ use Config\DatabaseConnection; // Replace with your actual database connection c
 class UserDao
 {
 	private $db;
-	
+
 	public function __construct()
 	{
 		$this->db = new DatabaseConnection();
 	}
-	public function authenticateUser($username, $password) {
+	public function authenticateUser($username, $password)
+	{
 		// Query database for user
 		$stmt = $this->db->prepare("SELECT * FROM user WHERE username = ?");
 		$stmt->bindParam(1, $username);
 		$stmt->execute(); // This is necessary to actually run the query
-	
+
 		$user = $stmt->fetch(\PDO::FETCH_ASSOC);  // Fetches the next row from the result set as an array
 		error_log("User data: " . print_r($user, true));
 		if ($user && password_verify($password, $user['password_hash'])) {
 			$userEntity = new UserEntity($user);
-	
+
 			// Return the UserEntity
 			return $userEntity;
 		} else {
@@ -79,7 +80,7 @@ class UserDao
 
 	public function createUser($data)
 	{
-		
+
 		// Extract the necessary data from the $data array (e.g., name, email, password)
 		try {
 			// Hash the password (you should never store passwords in plaintext)
@@ -124,20 +125,20 @@ class UserDao
 			// Prepare the SQL query
 			$query = "UPDATE user SET username = ?, email = ?, full_name = ?, is_admin = ? WHERE id = ?";
 			$stmt = $this->db->prepare($query);
-	
+
 			// Bind parameters
 			$stmt->bindParam(1, $data['username']);
 			$stmt->bindParam(2, $data['email']);
 			$stmt->bindParam(3, $data['full_name']);
 			$stmt->bindParam(4, $data['is_admin']);
 			$stmt->bindParam(5, $id);
-	
+
 			// Execute the query
 			$stmt->execute();
-	
+
 			// Fetch the updated user data
 			$user = $this->getUserById($id);
-	
+
 			// Return the user data in the JSON response
 			return ['status' => 'User updated successfully', 'user' => $user];
 		} catch (\PDOException $e) {
@@ -151,18 +152,18 @@ class UserDao
 			// Prepare the SQL query
 			$query = "DELETE FROM user WHERE id = ?";
 			$stmt = $this->db->prepare($query);
-	
+
 			// Bind parameters
 			$stmt->bindParam(1, $id);
-	
+
 			// Execute the query
 			$stmt->execute();
-	
+
 			// Return the status in the JSON response
 			return ['status' => 'User deleted successfully'];
 		} catch (\PDOException $e) {
 			// Handle the exception (log, display an error, etc.)
 			return ['status' => "User deletion failed", 'message' => $e->getMessage()];
-		}// Delete the corresponding user record from the database using your database connection
+		} // Delete the corresponding user record from the database using your database connection
 	}
 }

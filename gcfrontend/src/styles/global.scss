@@ -1,15 +1,15 @@
 // gcfrontend/src/styles/global.scss
 // These are fundamental styles that are common across the entire application, such as resets, typography, colors, etc.
 
-@import './themes/light'; // Default theme
-@import './variables';
+@import "./themes/light"; // Default theme
+@import "./variables";
 
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
+	background-color: var(--background-color);
+	color: var(--text-color);
 }
 
 .button {
-  background-color: var(--primary-color);
-  color: var(--text-color);
+	background-color: var(--primary-color);
+	color: var(--text-color);
 }
