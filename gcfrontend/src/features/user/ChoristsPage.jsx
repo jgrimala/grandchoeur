@@ -1,41 +1,57 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext'; // Adjust the path as needed
+import React, { useEffect, useState } from 'react';
+import { fetchChoirMembers } from '../../services/ChoirMemberService'; // Update to your actual service path
+import './ChoristsPage.scss';
 
-const ChoristsPage = () => {
-    const [chorists, setChorists] = useState([]);
-    const { user } = useContext(AuthContext);
+const ChoristsPage = ({ isAdmin }) => {
+  const [chorists, setChorists] = useState([]);
+  const [error, setError] = useState("");
 
-    useEffect(() => {
-        fetchChorists();
-    }, []);
-
+  useEffect(() => {
     const fetchChorists = async () => {
-        // Dummy data fetch simulation
-        const data = [
-            { id: 1, name: 'John Doe', email: 'john@example.com', phone: '123-456-7890' },
-            { id: 2, name: 'Jane Smith', email: 'jane@example.com', phone: '987-654-3210' }
-        ];
+      try {
+        const data = await fetchChoirMembers();
         setChorists(data);
+      } catch (error) {
+        console.error("Error fetching chorists: ", error);
+        setError("Failed to fetch chorists.");
+      }
     };
 
-    return (
-        <div>
-            <h1>Chorists</h1>
-            <ul>
-                {chorists.map(chorist => (
-                    <li key={chorist.id}>
-                        {chorist.name}
-                        {user && user.is_admin && (
-                            <>
-                                <p>Email: {chorist.email}</p>
-                                <p>Phone: {chorist.phone}</p>
-                            </>
-                        )}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+    fetchChorists();
+  }, []);
+
+  return (
+    <div className="chorists-page">
+      <h2>Chorists</h2>
+      {error && <p>{error}</p>}
+      <table className="chorists-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Pupitre</th>
+            <th>Title</th>
+            <th>Join Date</th>
+            <th>Display Contact</th>
+          </tr>
+        </thead>
+        <tbody>
+          {chorists.map(chorist => (
+            <tr key={chorist.id}>
+              <td>{chorist.name}</td>
+              <td>{chorist.display_contact ? chorist.email : ''}</td>
+              <td>{chorist.display_contact ? chorist.phone : ''}</td>
+              <td>{chorist.pupitre}</td>
+              <td>{chorist.title}</td>
+              <td>{chorist.join_date}</td>
+              <td>{chorist.display_contact ? 'Yes' : 'No'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default ChoristsPage;

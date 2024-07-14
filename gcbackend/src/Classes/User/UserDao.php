@@ -9,7 +9,7 @@ namespace Classes\User;
 
 use Classes\User\UserEntity;
 use Config\DatabaseConnection; // Replace with your actual database connection class
-
+use PDO;
 /**
  * UserDao()
  *
@@ -29,10 +29,12 @@ class UserDao
 {
 	private $db;
 
-	public function __construct()
+	public function __construct(PDO $db)
 	{
-		$this->db = new DatabaseConnection();
+		$this->db = $db;
 	}
+
+
 	public function authenticateUser($username, $password)
 	{
 		// Query database for user
@@ -79,45 +81,28 @@ class UserDao
 	}
 
 	public function createUser($data)
-	{
+    {
+        try {
+            $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
 
-		// Extract the necessary data from the $data array (e.g., name, email, password)
-		try {
-			// Hash the password (you should never store passwords in plaintext)
-			$hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
+            $query = "INSERT INTO user (username, email, password_hash, full_name, is_admin) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $this->db->prepare($query);
 
-			// Prepare the SQL query
-			$query = "INSERT INTO user (username, email, password_hash, full_name, is_admin) VALUES (?, ?, ?, ?, ?)";
-			$stmt = $this->db->prepare($query);
+            $stmt->bindParam(1, $data['username']);
+            $stmt->bindParam(2, $data['email']);
+            $stmt->bindParam(3, $hashedPassword);
+            $stmt->bindParam(4, $data['full_name']);
+            $stmt->bindParam(5, $data['is_admin']);
 
-			// Bind parameters
-			$stmt->bindParam(1, $data['username']);
-			$stmt->bindParam(2, $data['email']);
-			$stmt->bindParam(3, $hashedPassword);
-			$stmt->bindParam(4, $data['full_name']);
-			$stmt->bindParam(5, $data['is_admin']);
+            $stmt->execute();
+            $userId = $this->db->lastInsertId(); // Directly call lastInsertId on the PDO object
 
-			// Execute the query
-			$stmt->execute();
-			$userId = $this->db->getConnection()->lastInsertId();
+            return $this->getUserById($userId);
+        } catch (\PDOException $e) {
+            return ['status' => "User creation failed", 'message' => $e->getMessage()];
+        }
+    }
 
-			// Fetch the user data
-			$user = $this->getUserById($userId);
-
-			// Return the user data in the JSON response
-			return ['status' => 'User created successfully', 'user' => $user];
-		} catch (\PDOException $e) {
-			// Handle the exception (log, display an error, etc.)
-			// echo "User creation failed: " . $e->getMessage();
-			return ['status' => "User creation failed", 'message' => $e->getMessage()];
-		}
-		// Create a new User entity
-		// $user = new User($name, $email, $password);
-
-		// Persist the user entity to the database using your database connection
-
-		// Return the ID of the created user
-	}
 
 	public function updateUser($id, $data)
 	{

@@ -1,0 +1,49 @@
+.chorists-page {
+	padding: 20px;
+  
+	h2 {
+	  text-align: center;
+	  margin-bottom: 20px;
+	}
+  
+	.chorists-table {
+	  width: 100%;
+	  border-collapse: collapse;
+	  margin: 0 auto;
+  
+	  th, td {
+		border: 1px solid #ddd;
+		padding: 8px;
+		text-align: left;
+	  }
+  
+	  th {
+		background-color: var(--sidebar-bg);
+		color: var(--sidebar-text);
+	  }
+  
+	  tr:nth-child(even) {
+		background-color: var(--background-color);
+	  }
+  
+	  tr:hover {
+		background-color: var(--hover-background-color);
+		color: var(--hover-text-color);
+	  }
+  
+	  button {
+		background-color: #007bff;
+		color: white;
+		padding: 5px 10px;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		margin-right: 5px;
+		transition: background-color 0.3s;
+  
+		&:hover {
+		  background-color: #0056b3;
+		}
+	  }
+	}
+  }

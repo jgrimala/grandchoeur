@@ -14,6 +14,7 @@
 use Config\Router;
 use Classes\User\UserController;
 use Classes\FeatureFlag\FeatureFlagController;
+use Classes\ChoirMember\ChoirMemberController;
 use Config\DatabaseConnection;
 use Middleware\AuthTokenMiddleware;
 
@@ -24,6 +25,7 @@ $db = $database->getConnection();
 
 $userController = new UserController($db);
 $featureFlagController = new FeatureFlagController($db);
+$choirMemberController = new ChoirMemberController($db);
 
 // User Routes
 $router->addRoute('POST', '/login', [$userController, 'login']);
@@ -43,5 +45,12 @@ $router->addRoute('DELETE', '/featureflag/{id}', [$featureFlagController, 'delet
 // User-specific Feature Flag Route
 $router->addRoute('GET', '/featureflag/user/{userId}/{flagName}', [$featureFlagController, 'getFeatureFlagForUser']);
 $router->addRoute('POST', '/featureflag', [$featureFlagController, 'createOrUpdateFeatureFlag']);
+
+// Choir Member Routes
+$router->addRoute('GET', '/choir-members', [$choirMemberController, 'getAllChoirMembers']);
+$router->addRoute('GET', '/choir-member/{id}', [$choirMemberController, 'getChoirMember']);
+$router->addRoute('POST', '/choir-member', [$choirMemberController, 'createChoirMember']);
+$router->addRoute('PUT', '/choir-member/{id}', [$choirMemberController, 'updateChoirMember']);
+$router->addRoute('DELETE', '/choir-member/{id}', [$choirMemberController, 'deleteChoirMember']);
 
 return $router;

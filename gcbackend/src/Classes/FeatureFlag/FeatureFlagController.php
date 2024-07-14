@@ -22,7 +22,7 @@ class FeatureFlagController
 	{
 		$this->featureFlagDao = new FeatureFlagDao($db);
 		$this->responder = new ApiResponder();
-		$this->authService = new AuthenticationService();
+		$this->authService = new AuthenticationService($db);
 	}
 
 	// Method to send JSON response

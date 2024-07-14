@@ -14,7 +14,7 @@ const AppLayout = () => {
   const isAdmin = user?.is_admin; // Check if the user is an admin
 
   const location = useLocation();
-  const showSidebar = location.pathname !== "/login"; // Only show sidebar if not on login page
+  const showSidebar = location.pathname !== "/login" && location.pathname !== "/register"; // Only show sidebar if not on login or register page
 
   return (
     <div className="app-body">

@@ -8,11 +8,12 @@
 namespace Classes\User;
 
 use Classes\User\UserDao;
+use Classes\ChoirMember\ChoirMemberDao;
 use \Firebase\JWT\JWT;
 use Service\ApiResponder;
 use Service\AuthenticationService;
 use Middleware\AuthTokenMiddleware;
-
+use PDO;
 /**
  * UserController()
  *
@@ -29,22 +30,23 @@ use Middleware\AuthTokenMiddleware;
 class UserController
 {
 	private $userDao; // User Data Access Object
+	private $choirMemberDao;
 	private $responder; // API Responder
 	private $authService;
 
-	public function __construct()
+	public function __construct(PDO $db)
 	{
-		$this->authService = new AuthenticationService();
-		$this->userDao = new UserDao();
+		$this->authService = new AuthenticationService($db);
+		$this->userDao = new UserDao($db);
+		$this->choirMemberDao = new ChoirMemberDao($db); // Initialize ChoirMemberDao
 	}
 
 	// Method to send JSON response
-	private function sendJsonResponse($data)
+	private function sendJsonResponse($data, $status = 200)
 	{
-		// Set header to application/json
 		header('Content-Type: application/json');
-		// Echo the data as a JSON string
-		echo json_encode($data, JSON_PRETTY_PRINT);
+        http_response_code($status);
+        echo json_encode($data);
 	}
 
 	/**
@@ -102,14 +104,29 @@ class UserController
 
 	// Method to create a new user
 	public function createUser()
-	{
-		$content = file_get_contents('php://input');
-		$data = json_decode($content, true);
-		// Validate and sanitize $postData here as necessary
+    {
+        $content = file_get_contents('php://input');
+        $data = json_decode($content, true);
 
-		$userId = $this->userDao->createUser($data);
-		$this->sendJsonResponse($userId);
-	}
+        $user = $this->userDao->createUser($data);
+
+        if (isset($user['id'])) {
+            // Also create a choir member
+            $choirMemberData = [
+				'user_id' => $user['id'],
+                'name' => $user['full_name'],
+                'email' => $user['email'],
+                'phone' => $data['phone'] ?? null, // Default to null if not provided
+                'join_date' => date('Y-m-d'), // Set to current date
+                'pupitre' => $data['pupitre'] ?? '', // Assuming 'pupitre' is passed in the request
+                'title' => $data['title'] ?? '',
+                'display_contact' => $data['display_contact'] ?? 1
+            ];
+            $this->choirMemberDao->createChoirMember($choirMemberData);
+        }
+
+        $this->sendJsonResponse($user);
+    }
 
 
 	// Method to update a user

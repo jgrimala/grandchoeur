@@ -10,7 +10,7 @@ namespace Service;
 use Firebase\JWT\JWT;
 use Classes\User\UserDao;
 use Service\ApiResponder;
-
+use PDO;
 /**
  * AuthenticationService()
  *
@@ -34,10 +34,11 @@ class AuthenticationService
 	 * Constructor for the AuthenticationService class.
 	 * Initializes a new instance of the UserDao class and gets the JWT secret key from environment variables.
 	 */
-	public function __construct()
+	public function __construct(PDO $db)
 	{
 		// Initialize a new instance of the UserDao class
-		$this->userDao = new UserDao();
+
+		$this->userDao = new UserDao($db);
 		// Get the JWT secret key from environment variables
 		$this->secretKey = $_ENV['JWT_SECRET_KEY'];
 		$this->responder = new ApiResponder();
