@@ -9,6 +9,11 @@ export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const navigate = useNavigate();
 
+	// Add useEffect here to log user state updates
+	useEffect(() => {
+		console.log("Updated user state:", user);
+	}, [user]); // Dependency array includes user to react to changes
+
 	const login = async (credentials) => {
 		try {
 			const API_BASE_URL = process.env.REACT_APP_API_URL;
@@ -20,7 +25,7 @@ export const AuthProvider = ({ children }) => {
 				console.log("Decoded User:", user); // Add this line to log the decoded user
 				setUser(user); // Save user details to state
 				localStorage.setItem("token", token); // Save the token to localStorage
-				navigate("/admin"); // Use navigate to redirect
+				navigate("/dashboard"); // Use navigate to redirect
 			} else {
 				throw new Error(
 					response.data.message || "Login failed with no success flag."
@@ -28,28 +33,35 @@ export const AuthProvider = ({ children }) => {
 			}
 		} catch (error) {
 			console.error("Login error:", error);
-			const errorMessage =
-				error.response && error.response.data && error.response.data.message
-					? error.response.data.message
-					: "Login failed due to network or server issue";
-			throw new Error(errorMessage);
+			// const errorMessage =
+			// 	error.response && error.response.data && error.response.data.message
+			// 		? error.response.data.message
+			// 		: "Login failed due to network or server issue";
+			//throw new Error(errorMessage);
+			throw error;
 		}
 	};
 
 	const logout = () => {
 		setUser(null);
-		localStorage.removeItem("token"); // Remove the token from localStorage
-		navigate("/login"); // Redirect to login page
+		console.log("User set to null, current user state:", user);  // This will still show the old value because state updates are asynchronous
+		localStorage.removeItem("token");
+		navigate("/");
 	};
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 		if (token) {
-			console.log("Token:", token); // Add this line to log the token
-			const decodedToken = jwtDecode(token);
-			const user = decodedToken.data; // Extract the nested data object
-			console.log("Decoded User on load:", user); // Add this line to log the decoded user on page load
-			setUser(user);
+			// const decodedToken = jwtDecode(token);
+			// const user = decodedToken.data; // Extract the nested data object
+			// console.log("Decoded User on load:", user); // Add this line to log the decoded user on page load
+			// setUser(user);
+			try {
+				const decodedToken = jwtDecode(token);
+				setUser(decodedToken.data); // Set user from decoded token data
+			} catch (error) {
+				console.error("Error decoding token:", error);
+			}
 		}
 	}, []);
 

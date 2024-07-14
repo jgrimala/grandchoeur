@@ -11,6 +11,7 @@ const resources = {
 		translation: {
 			Home: "Home",
 			Login: "Login",
+			Logout: "Logout",
 			"Change Language": "Change Language",
 			Username: "Username",
 			Password: "Password",
@@ -22,6 +23,7 @@ const resources = {
 		translation: {
 			Home: "Accueil",
 			Login: "Connexion",
+			Logout: "Déconnexion",
 			"Change Language": "Changer de langue",
 			Username: "Nom d'utilisateur",
 			Password: "Mot de passe",

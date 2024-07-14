@@ -1,4 +1,14 @@
-$primary-color: #000000;
-$secondary-color: #333333;
-$text-color: #ffffff;
-$background-color: #000000;
+:root.dark {
+    --background-color: #333;
+    --text-color: #fff;
+
+    --sidebar-bg: #404040;
+    --sidebar-text: #ccc;
+
+	--header-bg: #444;
+    --header-text: #fff;
+
+    --hover-background-color: #555;
+    --hover-text-color: #fff;
+    // any other variables
+}

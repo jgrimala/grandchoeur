@@ -1,42 +1,40 @@
-/**
- * Header.scss
- * components\layout\header\Header.scss
- */
+/* src/components/layout/header/Header.scss */
 
 .header {
-	background-color: #333;
-	.nav-list {
-		list-style-type: none;
-		display: flex;
-		justify-content: flex-end;
-		align-items: center;
-		margin: 0;
-		padding: 30px;
-	}
+    background-color: var(--header-bg);
+    color: var(--header-text);
 
-	.nav-item {
-		margin: 0;
-		padding-right: 30px;
+    .nav-list {
+        list-style-type: none;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0;
+        padding: 30px;
+    }
 
-		.nav-link,
-		button {
-			// Apply styles to both links and buttons
-			padding: 0;
-			margin: 0;
-			background: none; // Remove any default background from buttons
-			border: none; // Remove any default borders from buttons
-			color: rgb(153, 153, 153); // Same text color
-			text-decoration: none; // Ensure no underline
-			cursor: pointer; // Cursor pointer like a link
+    .nav-item {
+        margin: 0;
+        padding-right: 30px;
 
-			&:hover {
-				color: #fff; // Change color on hover
-				text-decoration: underline; // Underline on hover like links
-			}
+        .nav-link,
+        button {
+            padding: 0;
+            margin: 0;
+            background: none;
+            border: none;
+            color: var(--header-text);
+            text-decoration: none;
+            cursor: pointer;
 
-			&:focus {
-				outline: none; // Remove focus outline from buttons for aesthetic purposes
-			}
-		}
-	}
+            &:hover {
+                color: var(--header-text);
+                text-decoration: underline;
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
 }

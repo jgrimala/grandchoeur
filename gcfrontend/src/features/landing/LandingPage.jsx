@@ -1,20 +1,12 @@
-import React from "react";
+import React from 'react';
 
-/**
- * LandingPage.jsx
- * features\landing\LandingPage.jsx
- */
-
-// This component defines the layout of the landing page.
-const LandingPage = ({ children }) => {
-	return (
-		<div>
-			<main>
-				{children} {/* This will render the child components */}
-			</main>
-			<footer>{/* <Footer /> */}</footer>
-		</div>
-	);
+const LandingPage = () => {
+  return (
+    <div>
+      <h1>Welcome</h1>
+      <p>This is the landing page of our Grand Choeur.</p>
+    </div>
+  );
 };
 
 export default LandingPage;

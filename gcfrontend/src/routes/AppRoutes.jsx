@@ -1,28 +1,33 @@
 // src/routes/AppRoutes.jsx
-
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import LandingPage from '../features/landing/LandingPage';
+import DashboardPage from '../features/user/DashboardPage';
 import AuthPage from "../features/auth/AuthPage";
-import FeatureFlagsPage from "../features/admin/FeatureFlagsPage";
-import LandingPage from "../features/landing/LandingPage";
+import AboutPage from '../features/regular/AboutPage';
+import ShowsPage from '../features/regular/ShowsPage';
+import ScoresPage from '../features/user/ScoresPage';
+import ChoristsPage from '../features/user/ChoristsPage';
+import FeatureFlagsPage from '../features/admin/FeatureFlagsPage';
 
-/**
- * AppRoutes.jsx
- * routes\AppRoutes.jsx
- */
+const AppRoutes = ({ isAuthenticated, isAdmin }) => {
+  return (
+    <Routes>
+      <Route path="/" element={!isAuthenticated ? <LandingPage /> : <Navigate to="/dashboard" />} />
+      <Route path="/login" element={!isAuthenticated ? <AuthPage /> : <Navigate to="/dashboard" />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/shows" element={<ShowsPage />} />
 
-// This component defines the routes for the application.
-const AppRoutes = () => {
-	return (
-		// The Routes component is a wrapper for all Route components.
-		// <Routes> is like <Switch> in react-router-dom v5.
-		<Routes>
-			<Route path="/" element={<LandingPage />} />
-			<Route path="/login" element={<AuthPage />} />
-			<Route path="/admin" element={<FeatureFlagsPage />} />
-			<Route path="/featureflags" element={<FeatureFlagsPage />} />
-		</Routes>
-	);
+      {isAuthenticated && (
+        <>
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/scores" element={<ScoresPage />} />
+          <Route path="/chorists" element={<ChoristsPage isAdmin={isAdmin} />} />
+          {isAdmin && <Route path="/feature-flags" element={<FeatureFlagsPage />} />}
+        </>
+      )}
+    </Routes>
+  );
 };
 
 export default AppRoutes;

@@ -1,4 +1,16 @@
-$primary-color: #ffffff;
-$secondary-color: #f0f0f0;
-$text-color: #000000;
-$background-color: #ffffff;
+// src/styles/themes/light.scss
+
+:root.light {
+    --background-color: #fff;
+    --text-color: #000;
+
+    --sidebar-bg: #f0f0f0;
+    --sidebar-text: #333;
+	
+	--header-bg: #f9f9f9;
+    --header-text: #000;
+	
+    --hover-background-color: #ddd;
+    --hover-text-color: #000;
+    // any other variables
+}

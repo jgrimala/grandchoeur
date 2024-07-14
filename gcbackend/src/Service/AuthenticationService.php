@@ -97,9 +97,7 @@ class AuthenticationService
 			]
 		];
 
-		$secretKey = $_ENV['JWT_SECRET_KEY'];            // Retrieve from a secure location
-		$jwt = JWT::encode($data, $secretKey, 'HS512');
 		// Encode the data into a JWT token and return it
-		return $jwt;
+		return JWT::encode($data, $this->secretKey, 'HS512');
 	}
 }

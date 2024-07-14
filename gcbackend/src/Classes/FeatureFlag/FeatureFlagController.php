@@ -28,9 +28,10 @@ class FeatureFlagController
 	// Method to send JSON response
 	private function sendJsonResponse($data, $status = 200)
 	{
+		error_log("Sending response data: " . print_r($data, true));  // Log the actual data being sent
 		header('Content-Type: application/json');
 		http_response_code($status);
-		echo json_encode($data, JSON_PRETTY_PRINT);
+		echo json_encode($data);
 	}
 
 	// Method to get all feature flags
@@ -76,21 +77,16 @@ class FeatureFlagController
 	public function updateFeatureFlag($id)
 	{
 		if (!AuthTokenMiddleware::isAdmin()) {
-			return $this->responder->respondUnauthorized();
+			return $this->responder->respondUnauthorized("Access denied.");
 		}
-
+	
 		$data = json_decode(file_get_contents('php://input'), true);
-		error_log("Received data: " . print_r($data, true));
 		$flag = $this->featureFlagDao->getFeatureFlagById($id);
-
-
+	
 		if ($flag) {
 			if (isset($data['is_enabled'])) {
 				$flag['is_enabled'] = filter_var($data['is_enabled'], FILTER_VALIDATE_BOOLEAN);
-				error_log("Updated flag: " . print_r($flag, true));
-
 				$result = $this->featureFlagDao->updateFeatureFlag($id, $flag);
-
 				$this->sendJsonResponse($result);
 			} else {
 				$this->sendJsonResponse(['error' => 'No update data provided for is_enabled property'], 400);

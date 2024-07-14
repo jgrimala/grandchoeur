@@ -1,5 +1,30 @@
 // gcfrontend/src/styles/main.scss
+//@import "variables";
+@import "global";
 
-@import "styles/global.scss";
-@import "components/Button/Button.scss";
-@import "components/Navbar/Navbar.scss";
+// Import themes
+@import "themes/light";
+@import "themes/dark";
+
+// Import utilities
+@import "utilities";
+
+// Import component-specific styles
+@import "../components/layout/header/Header";
+@import "../components/layout/sidebar/SideBar";
+
+@import "../components/common/button/Button";
+@import "../components/common/input/Input";
+@import "../components/common/input/toggle/ToggleSwitch";
+@import "../components/common/navbar/Navbar";
+@import "../components/common/table/Table";
+@import "../components/common/theme/ThemeSwitcher";
+
+
+@import "../features/admin/FeatureFlagsPage";
+@import "../features/admin/FeatureFlagsWidget";
+@import "../features/auth/LoginPage";
+@import "../features/auth/components/LoginForm";
+//@import "../features/auth/components/Logout"; // Commenting out since Logout doesn't have a specific stylesheet
+@import "../features/landing/LandingPage";
+@import "../features/user/UserPage";

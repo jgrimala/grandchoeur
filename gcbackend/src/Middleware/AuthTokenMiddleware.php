@@ -38,17 +38,20 @@ class AuthTokenMiddleware
 	public function handle($request, $next)
 	{
 		$token = $request->getHeader('Authorization');
-		$user = $this->authService->getUserFromToken($token);
-
-		if ($user) {
-			error_log("User is_admin: " . $user->is_admin); // Log the user's admin status
-
-			if ($user->is_admin) {
-				return $next($request);
-			}
+		if (!$token) {
+			return $this->responder->respondUnauthorized("No token provided.");
 		}
 
-		return $this->responder->unauthorized();
+		try {
+			$decodedToken = JWT::decode($token, new Key($this->secretKey, 'HS512'));
+			if ($decodedToken->data->is_admin) {
+				return $next($request);
+			} else {
+				return $this->responder->respondUnauthorized("Access denied.");
+			}
+		} catch (\Exception $e) {
+			return $this->responder->respondUnauthorized("Invalid or expired token.");
+		}
 	}
 
 	/**
@@ -100,20 +103,17 @@ class AuthTokenMiddleware
 		$token = self::getTokenFromHeader();
 		if (!$token) {
 			error_log("No token found.");
-			return false;
+			return false; 
 		}
 
 		try {
 			$secretKey = $_ENV['JWT_SECRET_KEY'];
 			$decoded = JWT::decode($token, new Key($secretKey, 'HS512'));
-
-			// Ensure you are accessing the nested data correctly.
-			$isAdmin = $decoded->data->is_admin ?? false; // Using null coalescing operator to handle undefined index.
-
-			error_log("isAdmin: " . var_export($isAdmin, true)); // Log the is_admin value to help with debugging.
+			$isAdmin = isset($decoded->data->is_admin) && $decoded->data->is_admin;
+			error_log("isAdmin check: " . var_export($isAdmin, true));
 			return $isAdmin;
 		} catch (\Exception $e) {
-			error_log("JWT decoding failed: " . $e->getMessage()); // Log any exceptions during JWT decoding.
+			error_log("JWT decoding failed: " . $e->getMessage());
 			return false;
 		}
 	}

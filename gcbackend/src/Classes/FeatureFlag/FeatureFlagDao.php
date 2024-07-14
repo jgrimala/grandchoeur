@@ -81,17 +81,32 @@ class FeatureFlagDao
 
     public function updateFeatureFlag($id, $data)
     {
-        try {
-            $query = "UPDATE feature_flags SET is_enabled = ? WHERE id = ?";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(1, $data['is_enabled']);
-            $stmt->bindParam(2, $id);
+        // try {
 
-            $stmt->execute();
-            return $this->getFeatureFlagById($id);
-        } catch (\PDOException $e) {
-            return ['status' => "Feature flag update failed", 'message' => $e->getMessage()];
-        }
+		// $sql = "UPDATE feature_flags SET is_enabled = ? WHERE id = ?";
+		// $stmt = $this->db->prepare($sql);
+		// $stmt->execute([ $data['is_enabled'], $id]);
+		// } catch (\PDOException $e) {
+		// 	$this->sendJsonResponse(['error' => 'Internal Server Error', 'details' => $e->getMessage()], 500);
+		// }
+		// Assume $db is your PDO database connection object
+		$sql = "UPDATE feature_flags SET is_enabled = :is_enabled WHERE id = :id";
+		$stmt = $this->db->prepare($sql);
+		
+		// Bind parameters
+		$stmt->bindParam(':is_enabled', $data['is_enabled']);
+		$stmt->bindParam(':id', $id);
+		
+		// Execute the statement
+		$stmt->execute();
+		
+		// Check if any rows were updated
+		if ($stmt->rowCount() > 0) {
+			return ['success' => true, 'message' => 'Flag updated successfully'];
+		} else {
+			return ['error' => 'Update failed'];
+		}
+
     }
 
     public function deleteFeatureFlag($id)

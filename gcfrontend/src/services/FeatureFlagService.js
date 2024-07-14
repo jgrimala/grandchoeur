@@ -27,18 +27,18 @@ export const addFeatureFlag = async (flag) => {
 
 // Update an existing feature flag
 export const updateFeatureFlagEnabledStatus = async (id, isEnabled) => {
-	console.log("Updating feature flag:", id, { is_enabled: isEnabled }); // Log the payload
-	try {
-		const API_BASE_URL = process.env.REACT_APP_API_URL;
-		const response = await axios.put(`${API_BASE_URL}/featureflag/${id}`, {
-			is_enabled: isEnabled,
-		});
-		console.log("Updated feature flag response:", response.data); // Log the response
-		return response.data;
-	} catch (error) {
-		console.error("Error updating feature flag enabled status:", error);
-		throw error;
-	}
+	console.log("Sending update request for feature flag:", id, { is_enabled: isEnabled });
+    try {
+        const API_BASE_URL = process.env.REACT_APP_API_URL;
+        const response = await axios.put(`${API_BASE_URL}/featureflag/${id}`, {
+            is_enabled: isEnabled,
+        });
+        console.log("Response from updating feature flag:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error during feature flag update:", error);
+        throw error;
+    }
 };
 
 // Delete a feature flag
