@@ -53,9 +53,11 @@ class ApiResponder
 	 *
 	 * @param string $message The error message to include in the response. Defaults to 'Unauthorized'.
 	 */
-	public function respondUnauthorized($message = 'Unauthorized')
-	{
-		// Call the respondWithError method with a 401 status code and the provided message
-		$this->respondWithError($message, 401);
-	}
+    public static function respondUnauthorized($message = "Unauthorized")
+    {
+        header('Content-Type: application/json');
+        http_response_code(401);
+        echo json_encode(['error' => $message]);
+        exit();
+    }
 }

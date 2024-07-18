@@ -23,8 +23,8 @@
 
 @import "../features/admin/FeatureFlagsPage";
 @import "../features/admin/FeatureFlagsWidget";
-@import "../features/auth/LoginPage";
-@import "../features/auth/components/LoginForm";
+@import "../features/auth/AuthPage";
+@import "../features/auth/components/AuthForms";
 //@import "../features/auth/components/Logout"; // Commenting out since Logout doesn't have a specific stylesheet
 @import "../features/landing/LandingPage";
 @import "../features/user/UserPage";

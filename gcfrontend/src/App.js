@@ -7,6 +7,9 @@ import Header from "./components/layout/header/Header";
 import Sidebar from "./components/layout/sidebar/Sidebar"; // Make sure to create this component as described
 import AppRoutes from "./routes/AppRoutes";
 import "./styles/global.scss"; // Import global styles
+import './features/landing/LandingPage.scss'; // Landing page styles
+import './components/ParticlesComponent.scss'; // Particles component styles
+
 
 const AppLayout = () => {
   const { user } = useAuth(); // Get user details from AuthContext

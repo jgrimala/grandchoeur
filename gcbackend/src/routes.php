@@ -17,6 +17,7 @@ use Classes\FeatureFlag\FeatureFlagController;
 use Classes\ChoirMember\ChoirMemberController;
 use Config\DatabaseConnection;
 use Middleware\AuthTokenMiddleware;
+use Service\ApiResponder;
 
 $router = new Router();
 
@@ -52,5 +53,15 @@ $router->addRoute('GET', '/choir-member/{id}', [$choirMemberController, 'getChoi
 $router->addRoute('POST', '/choir-member', [$choirMemberController, 'createChoirMember']);
 $router->addRoute('PUT', '/choir-member/{id}', [$choirMemberController, 'updateChoirMember']);
 $router->addRoute('DELETE', '/choir-member/{id}', [$choirMemberController, 'deleteChoirMember']);
+
+// $router->addRoute('PUT', '/choir-member/{id}/display-contact', function($id) use ($db) {
+//     if (!AuthTokenMiddleware::isAdmin() && AuthTokenMiddleware::getUserId() != $id) {
+//         return ApiResponder::respondUnauthorized("You are not authorized to perform this action.");
+//     }
+//     $choirMemberController = new ChoirMemberController($db);
+//     return $choirMemberController->updateDisplayContact($id);
+// });
+
+$router->addRoute('PUT', '/choir-member/{id}/display-contact', [$choirMemberController, 'updateDisplayContact']);
 
 return $router;

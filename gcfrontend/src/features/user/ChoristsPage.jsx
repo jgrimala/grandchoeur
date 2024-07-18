@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { fetchChoirMembers } from '../../services/ChoirMemberService'; // Update to your actual service path
+import { fetchChoirMembers, updateDisplayContact } from '../../services/ChoirMemberService';
+import { useAuth } from "../../context/AuthContext"; // Ensure you import useAuth to get the user context
 import './ChoristsPage.scss';
 
 const ChoristsPage = ({ isAdmin }) => {
   const [chorists, setChorists] = useState([]);
   const [error, setError] = useState("");
+  const { user } = useAuth(); // Get the authenticated user
 
   useEffect(() => {
     const fetchChorists = async () => {
@@ -19,6 +21,19 @@ const ChoristsPage = ({ isAdmin }) => {
 
     fetchChorists();
   }, []);
+
+  const handleDisplayContactChange = async (id, currentStatus) => {
+    try {
+      const updatedStatus = !currentStatus;
+      await updateDisplayContact(id, updatedStatus);
+      setChorists(chorists.map(chorist => 
+        chorist.id === id ? { ...chorist, display_contact: updatedStatus } : chorist
+      ));
+    } catch (error) {
+      console.error("Error updating display contact: ", error);
+      setError("Failed to update display contact.");
+    }
+  };
 
   return (
     <div className="chorists-page">
@@ -45,7 +60,15 @@ const ChoristsPage = ({ isAdmin }) => {
               <td>{chorist.pupitre}</td>
               <td>{chorist.title}</td>
               <td>{chorist.join_date}</td>
-              <td>{chorist.display_contact ? 'Yes' : 'No'}</td>
+              <td>
+                {(isAdmin || chorist.user_id === user?.id) ? (
+                  <button onClick={() => handleDisplayContactChange(chorist.id, chorist.display_contact)}>
+                    {chorist.display_contact ? 'Hide' : 'Show'}
+                  </button>
+                ) : (
+                  chorist.display_contact ? 'Yes' : 'No'
+                )}
+              </td>
             </tr>
           ))}
         </tbody>

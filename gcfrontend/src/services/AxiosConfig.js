@@ -1,18 +1,27 @@
-// gcfrontend/src/services/axiosConfig.js
-
 import axios from "axios";
 
+const API_BASE_URL = "http://localhost/Grandchoeur/gcbackend/public/index.php"; // Ensure this URL is correct
+
 const axiosInstance = axios.create({
-	baseURL: "http://localhost/Grandchoeur/gcbackend/public/index.com", // Adjust this URL to your actual backend URL
-	withCredentials: true, // Ensure credentials are included with every request
-	headers: {
-		"Content-Type": "application/json",
-	},
+    baseURL: API_BASE_URL,
+    withCredentials: true,
+    headers: {
+        "Content-Type": "application/json",
+    },
 });
 
-const token = localStorage.getItem('token');
-if (token) {
-    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-}
+axiosInstance.interceptors.request.use(
+    config => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
 
 export default axiosInstance;
+export { API_BASE_URL };

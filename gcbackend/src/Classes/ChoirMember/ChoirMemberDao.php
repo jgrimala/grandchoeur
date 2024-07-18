@@ -120,4 +120,11 @@ use PDO;
  
 		 return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	 }
+
+	 public function updateDisplayContact($id, $displayContact)
+	 {
+		 $query = "UPDATE choir_members SET display_contact = ? WHERE id = ?";
+		 $stmt = $this->db->prepare($query);
+		 return $stmt->execute([$displayContact, $id]);
+	 }
  }

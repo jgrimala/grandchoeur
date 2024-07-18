@@ -1,9 +1,11 @@
 import axios from "./AxiosConfig"; // Importing the customized Axios instance
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 // Fetch all feature flags
 export const fetchFeatureFlags = async () => {
 	try {
-		const API_BASE_URL = process.env.REACT_APP_API_URL;
+		//const API_BASE_URL = process.env.REACT_APP_API_URL;
 		const response = await axios.get(`${API_BASE_URL}/featureflags`);
 		//console.log("Received data:", response.data);
 		return response.data;
@@ -16,7 +18,7 @@ export const fetchFeatureFlags = async () => {
 // Add a new feature flag
 export const addFeatureFlag = async (flag) => {
 	try {
-		const API_BASE_URL = process.env.REACT_APP_API_URL;
+		//const API_BASE_URL = process.env.REACT_APP_API_URL;
 		const response = await axios.post(`${API_BASE_URL}/featureflag`, flag);
 		return response.data;
 	} catch (error) {
@@ -29,7 +31,7 @@ export const addFeatureFlag = async (flag) => {
 export const updateFeatureFlagEnabledStatus = async (id, isEnabled) => {
 	console.log("Sending update request for feature flag:", id, { is_enabled: isEnabled });
     try {
-        const API_BASE_URL = process.env.REACT_APP_API_URL;
+        //const API_BASE_URL = process.env.REACT_APP_API_URL;
         const response = await axios.put(`${API_BASE_URL}/featureflag/${id}`, {
             is_enabled: isEnabled,
         });
@@ -44,7 +46,7 @@ export const updateFeatureFlagEnabledStatus = async (id, isEnabled) => {
 // Delete a feature flag
 export const deleteFeatureFlag = async (id) => {
 	try {
-		const API_BASE_URL = process.env.REACT_APP_API_URL;
+		//const API_BASE_URL = process.env.REACT_APP_API_URL;
 		const response = await axios.delete(`${API_BASE_URL}/featureflag/${id}`);
 		return response.data; // Normally returns a status message or the id of the deleted item
 	} catch (error) {
@@ -55,7 +57,7 @@ export const deleteFeatureFlag = async (id) => {
 
 export const getUserThemeFlag = async (userId) => {
 	try {
-		const API_BASE_URL = process.env.REACT_APP_API_URL;
+		//const API_BASE_URL = process.env.REACT_APP_API_URL;
 		const response = await axios.get(
 			`${API_BASE_URL}/featureflag/user/${userId}/theme_dark_mode`
 		);
@@ -69,7 +71,7 @@ export const getUserThemeFlag = async (userId) => {
 // Create or update user-specific feature flag for theme
 export const updateUserThemeFlag = async (userId, isDarkMode) => {
 	try {
-		const API_BASE_URL = process.env.REACT_APP_API_URL;
+		//const API_BASE_URL = process.env.REACT_APP_API_URL;
 		const response = await axios.post(`${API_BASE_URL}/featureflag`, {
 			user_id: userId,
 			feature_name: "theme_dark_mode",

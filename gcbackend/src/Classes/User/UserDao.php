@@ -10,6 +10,7 @@ namespace Classes\User;
 use Classes\User\UserEntity;
 use Config\DatabaseConnection; // Replace with your actual database connection class
 use PDO;
+
 /**
  * UserDao()
  *
@@ -54,6 +55,13 @@ class UserDao
 		}
 	}
 
+	public function getUserByUsername($username)
+	{
+		$query = "SELECT * FROM user WHERE username = ?";
+		$stmt = $this->db->prepare($query);
+		$stmt->execute([$username]);
+		return $stmt->fetch(\PDO::FETCH_ASSOC);
+	}
 
 	public function getAllUsers()
 	{
@@ -81,27 +89,27 @@ class UserDao
 	}
 
 	public function createUser($data)
-    {
-        try {
-            $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
+	{
+		try {
+			$hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
 
-            $query = "INSERT INTO user (username, email, password_hash, full_name, is_admin) VALUES (?, ?, ?, ?, ?)";
-            $stmt = $this->db->prepare($query);
+			$query = "INSERT INTO user (username, email, password_hash, full_name, is_admin) VALUES (?, ?, ?, ?, ?)";
+			$stmt = $this->db->prepare($query);
 
-            $stmt->bindParam(1, $data['username']);
-            $stmt->bindParam(2, $data['email']);
-            $stmt->bindParam(3, $hashedPassword);
-            $stmt->bindParam(4, $data['full_name']);
-            $stmt->bindParam(5, $data['is_admin']);
+			$stmt->bindParam(1, $data['username']);
+			$stmt->bindParam(2, $data['email']);
+			$stmt->bindParam(3, $hashedPassword);
+			$stmt->bindParam(4, $data['full_name']);
+			$stmt->bindParam(5, $data['is_admin']);
 
-            $stmt->execute();
-            $userId = $this->db->lastInsertId(); // Directly call lastInsertId on the PDO object
+			$stmt->execute();
+			$userId = $this->db->lastInsertId(); // Directly call lastInsertId on the PDO object
 
-            return $this->getUserById($userId);
-        } catch (\PDOException $e) {
-            return ['status' => "User creation failed", 'message' => $e->getMessage()];
-        }
-    }
+			return $this->getUserById($userId);
+		} catch (\PDOException $e) {
+			return ['status' => "User creation failed", 'message' => $e->getMessage()];
+		}
+	}
 
 
 	public function updateUser($id, $data)

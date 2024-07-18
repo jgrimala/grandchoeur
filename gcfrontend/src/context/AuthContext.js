@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import axios from "./../services/AxiosConfig"; // Ensure you have the correct path to your Axios instance
+import axios from "../services/AxiosConfig"; // Ensure you have the correct path to your Axios instance
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
@@ -33,11 +33,6 @@ export const AuthProvider = ({ children }) => {
 			}
 		} catch (error) {
 			console.error("Login error:", error);
-			// const errorMessage =
-			// 	error.response && error.response.data && error.response.data.message
-			// 		? error.response.data.message
-			// 		: "Login failed due to network or server issue";
-			//throw new Error(errorMessage);
 			throw error;
 		}
 	};
@@ -52,10 +47,6 @@ export const AuthProvider = ({ children }) => {
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 		if (token) {
-			// const decodedToken = jwtDecode(token);
-			// const user = decodedToken.data; // Extract the nested data object
-			// console.log("Decoded User on load:", user); // Add this line to log the decoded user on page load
-			// setUser(user);
 			try {
 				const decodedToken = jwtDecode(token);
 				setUser(decodedToken.data); // Set user from decoded token data
