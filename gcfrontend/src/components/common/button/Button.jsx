@@ -1,3 +1,7 @@
+/**
+ * button.jsx
+ * components\common\button\button.jsx
+ */
 import React from "react";
 
 // Button.jsx

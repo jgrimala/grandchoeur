@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import "./AuthForms.scss"; // Import shared styles
 
 const RegisterForm = () => {
   const [username, setUsername] = useState("");
@@ -35,7 +34,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="auth-form">
+    <div>
       <h2>{t("Register")}</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">{t("Username")}:</label>
@@ -71,7 +70,7 @@ const RegisterForm = () => {
           required
         />
         <button type="submit">{t("Register")}</button>
-        {error && <p className="error">{error}</p>}
+        {error && <p>{error}</p>}
       </form>
       <p>{t("Already have an account?")} <Link to="/login">{t("Login here")}</Link></p>
     </div>

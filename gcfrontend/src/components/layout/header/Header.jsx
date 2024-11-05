@@ -1,10 +1,9 @@
 // src/components/layout/header/Header.jsx
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import ThemeSwitcher from "../../common/theme/ThemeSwitcher";
-import "./Header.scss";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -19,39 +18,62 @@ const Header = () => {
   }, [i18n]);
 
   const isLoginPage = location.pathname === "/login";
-
   const currentLanguage = i18n.language;
+
   const changeLanguage = (language) => i18n.changeLanguage(language);
+
   const handleLogout = () => {
     logout();
     navigate('/');
   };
 
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
+
   return (
     <header className="header">
-      <nav>
+      <nav className="navigation">
         <ul className="nav-list">
-          <li className="nav-item">
-            <Link to="/" className="nav-link">{t("Home")}</Link>
+          <li>
+            <button onClick={() => handleNavigate("/")} className="nav-link">
+              {t("Home")}
+            </button>
           </li>
           {!user && !isLoginPage && (
-            <li className="nav-item">
-              <Link to="/login" className="nav-link">{t("Login")}</Link>
+            <li>
+              <button onClick={() => handleNavigate("/login")} className="nav-link">
+                {t("Login")}
+              </button>
             </li>
           )}
           {user && (
-            <li className="nav-item">
-              <button onClick={handleLogout} className="nav-link">{t("Logout")}</button>
+            <li>
+              <button onClick={handleLogout} className="nav-link">
+                {t("Logout")}
+              </button>
             </li>
           )}
-          <li className="nav-item">
+          <li>
             <button onClick={() => changeLanguage(currentLanguage === "fr" ? "en" : "fr")} className="nav-link">
               {currentLanguage === "fr" ? "EN" : "FR"}
             </button>
           </li>
-          <li className="nav-item">
+          <li>
             <ThemeSwitcher />
           </li>
+          <li>
+            <button onClick={() => handleNavigate("/dashboard")} className="nav-link">
+              {t("Dashboard")}
+            </button>
+          </li>
+          {user && user.is_admin && (
+            <li>
+              <button onClick={() => handleNavigate("/admin")} className="nav-link">
+                {t("Admin")}
+              </button>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

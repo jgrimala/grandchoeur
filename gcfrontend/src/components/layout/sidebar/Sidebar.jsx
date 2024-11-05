@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from "../../../context/AuthContext";
-import "./Sidebar.scss";
+
 
 const Sidebar = () => {
   const { user } = useAuth();
@@ -9,7 +9,7 @@ const Sidebar = () => {
   const isAdmin = isAuthenticated && user.is_admin;
 
   return (
-    <div className="sidebar">
+    <div>
       <ul>
         {isAuthenticated ? (
           <>

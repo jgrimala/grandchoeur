@@ -1,0 +1,55 @@
+// src/styles/pages/_home.scss
+
+.home-page {
+	height: 100vh;
+	display: flex;
+	justify-content: flex-start;  // Left alignment
+	align-items: center;
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	color: var(--text-color);
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;   
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 29, 124, 0.1);  // Darken the background with 50% opacity
+		z-index: 1;  // Ensure the overlay is beneath the content
+	  }
+	
+  
+	.left-section {
+    width: 50%;  // Occupies the left half of the screen
+    padding-left: 250px;  // Text is now 250px from the left side
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;  // Position relative to ensure content stays on top
+    z-index: 2;  // Make sure this content is above the overlay
+	margin-bottom: 100px; 
+	// opacity: 0.7;
+
+    .action-buttons {
+      display: flex;
+      align-items: center;
+      gap: 40px;  // Space between the button and email link
+      margin-top: 30px;  // Keeps the button and link lower on the page
+    }
+
+    .email-link {
+      font-size: 28px;
+      color: var(--text-color);
+      text-decoration: underline;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--accent-color);  // Hover color for the email link
+      }
+    }
+	}
+  }
+  

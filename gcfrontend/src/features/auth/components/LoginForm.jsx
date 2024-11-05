@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
-import "./AuthForms.scss"; // Import shared styles
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -26,7 +25,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="auth-form">
+    <div>
       <h2>{t("Login")}</h2>
       <form onSubmit={handleLogin}>
         <label htmlFor="username">{t("Username")}:</label>
@@ -46,7 +45,7 @@ const LoginForm = () => {
           required
         />
         <button type="submit">{t("Log In")}</button>
-        {error && <p className="error">{error}</p>}
+        {error && <p>{error}</p>}
       </form>
       <p>{t("Not registered yet?")} <Link to="/register">{t("Create an account")}</Link></p>
     </div>

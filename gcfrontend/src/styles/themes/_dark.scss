@@ -1,0 +1,17 @@
+:root.dark {
+	--background-color: #0E1214;  // Black
+    --text-color: #F0EDEE;  // Light
+    --header-bg: #205D77;  // Accent Color 1 for the header
+    --header-text: #F0EDEE;  // Light text for header
+    --sidebar-bg: #742626;  // Accent Color 2 for sidebar
+    --sidebar-text: #F0EDEE;  // Light text for sidebar
+    --link-color: #205D77;  // Accent Color 1 for links
+    --hover-background-color: #474040;  // Medium gray for hover background
+    --hover-text-color: #F0EDEE;  // Light text for hover
+	--accent-color: #205D77;  // Accent color for dark mode
+	--accent-color-transparent: rgba(32, 93, 119, 0.6);
+	--secondary-accent-color: #742626;  // Additional accent if needed
+	--secondary-accent-color-transparent: rgba(116, 38, 38, 0.6);
+}
+
+

@@ -8,8 +8,7 @@ import {
   updateFeatureFlagEnabledStatus,
   deleteFeatureFlag,
 } from "../../services/FeatureFlagService";
-import ToggleSwitch from "../../components/common/input/toggle/ToggleSwitch";
-import "./FeatureFlagsWidget.scss";
+import ToggleSwitch from "../../components/common/toggle/ToggleSwitch";
 
 const FeatureFlagsWidget = () => {
   const [flags, setFlags] = useState([]);
@@ -61,10 +60,10 @@ const FeatureFlagsWidget = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="feature-flags-widget">
+    <div>
       <h2>Feature Flags</h2>
       {flags.map((flag) => (
-        <div key={flag.id} className="flag">
+        <div key={flag.id}>
           <span>{flag.feature_name}</span>
           <span>{flag.description}</span>
           <span>Created By: {flag.created_by || "Unknown"}</span>

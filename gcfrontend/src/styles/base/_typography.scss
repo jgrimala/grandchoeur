@@ -1,0 +1,58 @@
+// _typography.scss
+
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0 0 15px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+        color: var(--hover-text-color);
+    }
+}
+
+
+
+.main-heading {
+	font-family: "operetta-52", serif;
+	font-weight: 700;
+	font-style: normal;
+
+	font-size: 120px;  // Larger size for the main heading
+	margin-bottom: 10px;
+	line-height: 1.2;  // Adjust line height for tighter spacing
+
+	background: linear-gradient(to bottom, #059fc5, #0ac4ba);  // Vertical gradient
+	-webkit-background-clip: text;  // Clip the background to the text
+	-webkit-text-fill-color: transparent;  // Make text transparent to show gradient
+  
+	.line-1 {
+	  display: block;  // Ensure each line is displayed as block to force line break
+	}
+  
+	.line-2 {
+	  display: block;  // Place "du Centre-Sud" on the second line
+	}
+  }
+  
+  .subtitle {
+	font-size: 32px;  // A bit smaller for the subtitle
+	// font-weight: normal;
+	margin-bottom: 20px;
+	font-family: "anzeigen-grotesk", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+  }

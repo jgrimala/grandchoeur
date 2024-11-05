@@ -1,0 +1,15 @@
+:root.light {
+	--background-color: #F0EDEE;  // Light cream background
+    --text-color: #0E1214;  // Dark for main text
+    --header-bg: lighten(#205D77, 30%);  // Lightened Accent Color 1
+    --header-text: #0E1214;  // Dark for header text
+    --sidebar-bg: lighten(#742626, 30%);  // Lightened Accent Color 2 for sidebar
+    --sidebar-text: #0E1214;  // Dark for sidebar text
+    --link-color: lighten(#205D77, 30%);  // Lightened Accent Color 1 for links
+    --hover-background-color: #b0acac;  // Light gray for hover background
+    --hover-text-color: #0E1214;  // Dark text for hover
+	--accent-color: #205D77;  // Accent color for light mode
+	--accent-color-transparent: rgba(32, 93, 119, 0.6); 
+	--secondary-accent-color: #742626;  // Additional accent if needed
+	--secondary-accent-color-transparent: rgba(116, 38, 38, 0.6);
+}

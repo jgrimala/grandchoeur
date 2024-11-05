@@ -1,15 +1,18 @@
 /* src/styles/App.scss */
 
+body {
+	margin: 0;
+	padding: 0;
+}
+
 .app-body {
-	display: flex;
-	flex-direction: row;
-	height: 100vh;
+	position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
   }
   
   .main-content {
 	flex-grow: 1;
-	padding: 20px;
-	background-color: var(--background-color);
-	color: var(--text-color);
   }
   

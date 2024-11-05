@@ -1,349 +1,213 @@
-/* src/styles/global.scss */
-:root.dark {
-  --background-color: #333;
-  --text-color: #fff;
-  --sidebar-bg: #404040;
-  --sidebar-text: #ccc;
-  --header-bg: #444;
-  --header-text: #fff;
-  --hover-background-color: #555;
-  --hover-text-color: #fff;
-}
-
-:root.light {
-  --background-color: #fff;
-  --text-color: #000;
-  --sidebar-bg: #f0f0f0;
-  --sidebar-text: #333;
-  --header-bg: #f9f9f9;
-  --header-text: #000;
-  --hover-background-color: #ddd;
-  --hover-text-color: #000;
-}
-
-:root {
-  --hover-background-color: #555;
-  --hover-text-color: #fff;
-}
-
-body {
-  background-color: var(--background-color);
+h1, h2, h3, h4, h5, h6 {
   color: var(--text-color);
-  margin: 0;
-  font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Arial, sans-serif;
+  margin: 0 0 15px;
 }
 
-a, button {
-  font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+p {
   font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
   color: var(--text-color);
-  text-decoration: none;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
 }
-a:hover, button:hover {
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+a:hover {
   color: var(--hover-text-color);
-  text-decoration: underline;
-}
-a:focus, button:focus {
-  outline: none;
 }
 
-.app-body {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
+.main-heading {
+  font-family: "operetta-52", serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 120px;
+  margin-bottom: 10px;
+  line-height: 1.2;
+  background: linear-gradient(to bottom, #059fc5, #0ac4ba);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-
-.main-content {
-  flex-grow: 1;
-  padding: 20px;
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
-
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 20px;
-  background-color: var(--sidebar-bg);
-  color: var(--sidebar-text);
-  width: 250px;
-  height: 100vh;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-}
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  width: 100%;
-}
-.sidebar ul li {
-  margin: 10px 0;
-  width: 100%;
-}
-.sidebar ul li a {
-  text-decoration: none;
-  color: var(--sidebar-text);
+.main-heading .line-1 {
   display: block;
-  padding: 10px;
-  width: 100%;
-  transition: background-color 0.3s, color 0.3s;
 }
-.sidebar ul li a:hover {
+.main-heading .line-2 {
+  display: block;
+}
+
+.subtitle {
+  font-size: 32px;
+  margin-bottom: 20px;
+  font-family: "anzeigen-grotesk", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+button {
+  background-color: var(--link-color);
+  color: var(--text-color);
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+button:hover {
   background-color: var(--hover-background-color);
   color: var(--hover-text-color);
 }
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.about-button {
+  padding: 15px 40px;
+  border: 4px solid var(--accent-color);
+  background-color: transparent;
+  border-radius: 30px;
+  color: var(--text-color);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.about-button:hover {
+  background-color: var(--accent-color-transparent);
+  border: 4px solid var(--accent-color-transparent);
+  color: #fff;
+}
+.about-button:focus {
+  outline: none;
+}
 
 :root.light {
-  --background-color: #fff;
-  --text-color: #000;
-  --sidebar-bg: #f0f0f0;
-  --sidebar-text: #333;
-  --header-bg: #f9f9f9;
-  --header-text: #000;
-  --hover-background-color: #ddd;
-  --hover-text-color: #000;
+  --background-color: #F0EDEE;
+  --text-color: #0E1214;
+  --header-bg: lighten(#205D77, 30%);
+  --header-text: #0E1214;
+  --sidebar-bg: lighten(#742626, 30%);
+  --sidebar-text: #0E1214;
+  --link-color: lighten(#205D77, 30%);
+  --hover-background-color: #b0acac;
+  --hover-text-color: #0E1214;
+  --accent-color: #205D77;
+  --accent-color-transparent: rgba(32, 93, 119, 0.6);
+  --secondary-accent-color: #742626;
+  --secondary-accent-color-transparent: rgba(116, 38, 38, 0.6);
 }
 
 :root.dark {
-  --background-color: #333;
-  --text-color: #fff;
-  --sidebar-bg: #404040;
-  --sidebar-text: #ccc;
-  --header-bg: #444;
-  --header-text: #fff;
-  --hover-background-color: #555;
-  --hover-text-color: #fff;
+  --background-color: #0E1214;
+  --text-color: #F0EDEE;
+  --header-bg: #205D77;
+  --header-text: #F0EDEE;
+  --sidebar-bg: #742626;
+  --sidebar-text: #F0EDEE;
+  --link-color: #205D77;
+  --hover-background-color: #474040;
+  --hover-text-color: #F0EDEE;
+  --accent-color: #205D77;
+  --accent-color-transparent: rgba(32, 93, 119, 0.6);
+  --secondary-accent-color: #742626;
+  --secondary-accent-color-transparent: rgba(116, 38, 38, 0.6);
 }
 
 .header {
-  background-color: var(--header-bg);
-  color: var(--header-text);
-}
-.header .nav-list {
-  list-style-type: none;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin: 0;
-  padding: 30px;
-}
-.header .nav-item {
-  margin: 0;
-  padding-right: 30px;
-}
-.header .nav-item .nav-link,
-.header .nav-item button {
-  padding: 0;
-  margin: 0;
-  background: none;
-  border: none;
-  color: var(--header-text);
-  text-decoration: none;
-  cursor: pointer;
-}
-.header .nav-item .nav-link:hover,
-.header .nav-item button:hover {
-  color: var(--hover-text-color);
-  text-decoration: underline;
-}
-.header .nav-item .nav-link:focus,
-.header .nav-item button:focus {
-  outline: none;
-}
-
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 20px;
-  background-color: var(--sidebar-bg);
-  color: var(--sidebar-text);
-  width: 250px;
-  height: 100vh;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-}
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  width: 100%;
-}
-.sidebar ul li {
-  margin: 10px 0;
-  width: 100%;
-}
-.sidebar ul li a {
-  text-decoration: none;
-  color: var(--sidebar-text);
-  display: block;
-  padding: 10px;
-  width: 100%;
-  transition: background-color 0.3s, color 0.3s;
-}
-.sidebar ul li a:hover {
-  background-color: var(--hover-background-color);
-  color: var(--hover-text-color);
-}
-
-/**
- * Button.scss
- * components\common\button\Button.scss
- */
-/**
- * Input.scss
- * components\common\input\Input.scss
- */
-.input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-/**
- * ToggleSwitch.scss
- * components\common\input\toggle\ToggleSwitch.scss
- */
-.toggle-switch {
-  width: 60px;
-  height: 34px;
-  background-color: #ccc;
-  border-radius: 17px;
-  position: relative;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-.toggle-switch .toggle-knob {
-  width: 26px;
-  height: 26px;
-  background-color: white;
-  border-radius: 50%;
   position: absolute;
-  top: 4px;
-  left: 4px;
-  transition: left 0.3s, right 0.3s;
-}
-.toggle-switch.enabled {
-  background-color: #4caf50;
-}
-.toggle-switch.enabled .toggle-knob {
-  left: 30px;
-}
-
-/**
- * Navbar.scss
- * components\common\navbar\Navbar.scss
- */
-.feature-flags h1 {
-  color: #333;
-}
-.feature-flags ul {
-  list-style-type: none;
-  padding: 0;
-}
-.feature-flags ul li {
-  margin-bottom: 10px;
-}
-.feature-flags ul li input[type=checkbox] {
-  margin-right: 5px;
-}
-
-/**
- * FeatureFlagsWidget.scss
- * features\admin\FeatureFlagsWidget.scss
- */
-.feature-flags-widget {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.feature-flags-widget .flag {
-  margin: 10px;
-  display: flex;
-  justify-content: space-between;
-  width: 800px;
-}
-.feature-flags-widget .flag button {
-  margin-left: 10px;
-}
-
-/* src/components/auth/AuthForms.scss */
-.auth-form {
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 320px;
-  margin: 2rem auto;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-.auth-form h2 {
-  text-align: center;
-}
-.auth-form form {
+  z-index: 10;
+  padding: 35px 0;
   display: flex;
-  flex-direction: column;
-}
-.auth-form form label {
-  margin-bottom: 5px;
-}
-.auth-form form input {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.auth-form form .error {
-  color: red;
-  font-size: 0.8rem;
-  margin-top: -15px;
-  margin-bottom: 10px;
-  padding: 20px;
-}
-.auth-form form button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-.auth-form form button:hover {
-  background-color: #0056b3;
-}
-.auth-form p {
-  text-align: center;
-  margin-top: 10px;
-}
-.auth-form p a {
-  color: #007bff;
-  text-decoration: none;
-}
-.auth-form p a:hover {
-  text-decoration: underline;
+  justify-content: center;
 }
 
-.landing-page {
-  position: relative;
-  width: 100%;
-  height: 100vh;
+.navigation {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  color: #ffffff;
-  background: #282c34;
 }
-.landing-page .content {
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+/* Apply consistent styling for nav-link and button elements */
+.nav-link, button {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s;
+  text-transform: uppercase;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  /* Remove background on click for buttons */
+}
+.nav-link:hover, button:hover {
+  color: var(--accent-color);
+}
+.nav-link:focus, .nav-link:active, button:focus, button:active {
+  outline: none;
+  background: none;
+}
+
+.home-page {
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color: var(--text-color);
+}
+.home-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 29, 124, 0.1);
   z-index: 1;
 }
+.home-page .left-section {
+  width: 50%;
+  padding-left: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 100px;
+}
+.home-page .left-section .action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-top: 30px;
+}
+.home-page .left-section .email-link {
+  font-size: 28px;
+  color: var(--text-color);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.home-page .left-section .email-link:hover {
+  color: var(--accent-color);
+}
+
+/*# sourceMappingURL=main.css.map */
