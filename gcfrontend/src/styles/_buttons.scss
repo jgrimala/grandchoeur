@@ -1,0 +1,19 @@
+// _buttons.scss
+
+.button-primary {
+	@include button-style(
+		var(--primary),
+		var(--text),
+		$spacing-medium $spacing-large,
+		$border-radius-small);
+}
+
+.button-secondary {
+	@include button-style(--secondary, #fff);
+}
+
+.button-outlined {
+	background-color: transparent;
+	color: --primary;
+	border: 1px solid --primary;
+}

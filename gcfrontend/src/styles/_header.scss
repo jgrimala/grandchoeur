@@ -1,0 +1,55 @@
+// src/styles/_header.scss
+
+@import 'variables';
+@import 'mixins';
+
+.header {
+  position: fixed; // Keep the header fixed at the top of the page
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: $spacing-medium;
+  background-color: transparent !important; // No background for header
+  color: var(--text);
+  z-index: 1000; // Ensure the header is above other content
+
+  .navigation {
+    display: flex;
+    justify-content: center; // Center the navigation items
+    align-items: center;
+    background-color: transparent !important; // No background for the navigation area
+    width: 100%;
+  }
+
+  .nav-list {
+    list-style: none;
+    display: flex;
+    gap: $spacing-large; // Space between the items
+    padding: 0;
+    margin: 0;
+    background-color: transparent; // Ensure no background
+    align-items: center;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    color: var(--text); // Use a light color that's readable over any potential background content
+    font-size: 1.5rem; // Larger font size for accessibility (suitable for older viewers)
+    font-weight: bold;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+    border: none;
+    background: transparent; // Remove any background color from buttons
+    cursor: pointer;
+
+    &:hover {
+      color: var(--accent); // Highlight color on hover for better interactivity
+    }
+
+    &:focus,
+    &:active {
+      outline: none;
+      background: transparent; // Ensure transparency on focus and active states
+    }
+  }
+}

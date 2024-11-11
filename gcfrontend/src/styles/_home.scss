@@ -1,0 +1,104 @@
+.home-page {
+	height: 100vh;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	color: var(--text-color);
+  
+	.left-section {
+	  max-width: 100%;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  position: relative;
+	  z-index: 2;
+	  margin-bottom: 6rem;
+	  /* Consider removing or adjusting white-space */
+	  
+	  .title-container {
+		max-width: 100%;
+		opacity: 0.8;
+		background-color: #dee8fa;
+		padding: var(--title-container-padding);
+		margin-bottom: 2rem;
+		/* Use flexbox instead of float/clear if possible */
+		display: block;
+  
+		.line {
+		  width: max-content;
+		  font-size: var(--title-font-size);
+		  color: rgba(8, 16, 35, 0.8);
+		  text-align: left;
+  
+		  .subline {
+			font-size: var(--subline-font-size);
+			font-weight: bold;
+		  }
+		}
+	  }
+  
+	  .subtitle-line {
+		background-color: rgba(18, 28, 32, 0.9);
+		border: #068db6 1px solid;
+		border-left: 0;
+		color: #dbdee9;
+		padding: var(--title-container-padding);
+		opacity: 0.8;
+		font-size: var(--subtitle-font-size);
+	  }
+  
+	  .action-links-container {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 6rem;
+		opacity: 0.8;
+  
+		.action-links-box {
+		  background-color: rgba(18, 28, 32, 0.8);
+		  border: #068db6 1px solid;
+		  border-left: 0;
+		}
+  
+		.action-links-mail {
+		  margin-left: 18rem;
+		}
+  
+		.about-link {
+		  margin: 0;
+		  display: block;
+		  opacity: 0.8;
+		  background-color: rgba(18, 28, 32, 0.9);
+		  color: #eceef3;
+		  font-size: var(--link-font-size);
+		  cursor: pointer;
+		  text-decoration: none;
+		  transition: all 0.3s ease;
+		  border: none;
+  
+		  &:hover {
+			color: #068db6;
+		  }
+  
+		  .my-icon {
+			margin-right: 1.2rem;
+		  }
+		}
+  
+		.email-link {
+		  color: #eceef3;
+		  text-decoration: underline;
+		  cursor: pointer;
+		  opacity: 0.8;
+  
+		  &:hover {
+			color: var(--accent-color);
+		  }
+		}
+	  }
+	}
+  }
+  

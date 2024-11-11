@@ -3,29 +3,29 @@
  * components\common\table\table.jsx
  */
 
-import React from "react";
+import React from 'react';
 
-const Table = ({ data, columns }) => {
-	return (
-		<table>
-			<thead>
-				<tr>
-					{columns.map((column, index) => (
-						<th key={index}>{column}</th>
-					))}
-				</tr>
-			</thead>
-			<tbody>
-				{data.map((row, index) => (
-					<tr key={index}>
-						{columns.map((column, index) => (
-							<td key={index}>{row[column]}</td>
-						))}
-					</tr>
-				))}
-			</tbody>
-		</table>
-	);
+const Table = ({ headers, data }) => {
+  return (
+    <table className="table">
+      <thead>
+        <tr>
+          {headers.map((header, index) => (
+            <th key={index}>{header}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((row, rowIndex) => (
+          <tr key={rowIndex}>
+            {row.map((cell, cellIndex) => (
+              <td key={cellIndex}>{cell}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 };
 
 export default Table;

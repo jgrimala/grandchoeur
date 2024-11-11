@@ -1,0 +1,14 @@
+// _typography.scss
+@import 'mixins';
+
+.heading {
+  @include typography('heading');
+}
+
+.body-text {
+  @include typography('body');
+}
+
+.small-text {
+  @include typography('small');
+}

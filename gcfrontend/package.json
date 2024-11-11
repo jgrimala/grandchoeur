@@ -3,6 +3,9 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^6.6.0",
+		"@fortawesome/free-solid-svg-icons": "^6.6.0",
+		"@fortawesome/react-fontawesome": "^0.2.2",
 		"@testing-library/jest-dom": "^5.17.0",
 		"@testing-library/react": "^13.4.0",
 		"@testing-library/user-event": "^13.5.0",
@@ -30,7 +33,7 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"sass": "sass --no-source-map src/assets/styles/main.scss src/assets/styles/main.css",
+		"sass": "sass --no-source-map src/styles/main.scss src/styles/main.css",
 		"sass:watch": "sass --watch src/styles/main.scss:src/styles/main.css"
 	},
 	"browserslist": {

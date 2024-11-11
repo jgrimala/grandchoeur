@@ -2,18 +2,18 @@
  * button.jsx
  * components\common\button\button.jsx
  */
-import React from "react";
+import React from 'react';
 
-// Button.jsx
-// components\common\button\Button.jsx
+const Button = ({ variant, children, ...props }) => {
+  let buttonClass = 'button-primary';
+  if (variant === 'secondary') buttonClass = 'button-secondary';
+  if (variant === 'outlined') buttonClass = 'button-outlined';
 
-// Button component definition
-const Button = () => {
-	return (
-		// Returning a div element as the root of the component
-		<div></div>
-	);
+  return (
+    <button className={buttonClass} {...props}>
+      {children}
+    </button>
+  );
 };
 
-// Exporting the Button component as the default export of this module
 export default Button;

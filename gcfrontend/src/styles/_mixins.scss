@@ -1,0 +1,149 @@
+// Button Styles
+@mixin button-style($bg-color: var(--primary),
+	$text-color: var(--text),
+	$padding: $spacing-medium $spacing-large,
+	$border-radius: $border-radius-small) {
+	background-color: $bg-color;
+	color: $text-color;
+	padding: $padding;
+	border-radius: $border-radius;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+
+	&:hover {
+		background-color: var(--hover-primary); // Use a predefined hover color variable
+	}
+}
+
+// Flexbox Utilities
+@mixin flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin flex-column($align: stretch, $justify: flex-start) {
+	display: flex;
+	flex-direction: column;
+	align-items: $align;
+	justify-content: $justify;
+}
+
+// Card Styles
+@mixin card-style($padding: $spacing-medium,
+	$border-radius: $border-radius-small) {
+	background-color: var(--surface);
+	padding: $padding;
+	border-radius: $border-radius;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+// Table Styles
+@mixin table-style($padding: $spacing-small) {
+	width: 100%;
+	border-collapse: collapse;
+
+	th,
+	td {
+		padding: $padding;
+		border: 1px solid var(--border);
+	}
+}
+
+// Input Styles
+@mixin input-style($padding: $spacing-small,
+	$border-radius: $border-radius-small) {
+	padding: $padding;
+	border: 1px solid var(--border);
+	border-radius: $border-radius;
+}
+
+// Typography Styles
+@mixin typography($type) {
+	@if $type =='heading' {
+		font-family: $font-primary;
+		font-size: $font-size-large;
+		font-weight: bold;
+	}
+
+	@else if $type =='body' {
+		font-family: $font-secondary;
+		font-size: $font-size-base;
+	}
+
+	@else if $type =='small' {
+		font-family: $font-secondary;
+		font-size: $font-size-small;
+	}
+}
+
+@mixin theme-colors($theme) {
+	@if $theme =='light' {
+		--primary: #{$light-primary};
+		--background: #{$light-background};
+		--surface: #{$light-surface};
+		--secondary: #{$light-secondary};
+		--text: #{$light-text};
+		--muted-text: #{$light-muted-text};
+		--border: #{$light-border};
+		--accent: #{$light-accent};
+		--hover-primary: #{$light-hover-primary};
+		--hover-secondary: #{$light-hover-secondary};
+		--hover-accent: #{$light-hover-accent};
+	}
+
+	@else if $theme =='dark' {
+		--primary: #{$dark-primary};
+		--background: #{$dark-background};
+		--surface: #{$dark-surface};
+		--secondary: #{$dark-secondary};
+		--text: #{$dark-text};
+		--muted-text: #{$dark-muted-text};
+		--border: #{$dark-border};
+		--accent: #{$dark-accent};
+		--hover-primary: #{$dark-hover-primary};
+		--hover-secondary: #{$dark-hover-secondary};
+		--hover-accent: #{$dark-hover-accent};
+	}
+}
+
+// Declare mixins at the top level
+@mixin set-font-size($breakpoint) {
+	@each $key, $size in $media {
+		@if $breakpoint ==$key {
+			.line {
+				--title-font-size: #{map-get($title-font-size, $key)};
+				font-size: var(--title-font-size);
+
+				.subline {
+					--subline-font-size: #{map-get($subline-font-size, $key)};
+					font-size: var(--subline-font-size);
+				}
+			}
+
+			.subtitle-line {
+				--subtitle-font-size: #{map-get($subtitle-font-size, $key)};
+				font-size: var(--subtitle-font-size);
+			}
+
+			.about-link {
+				--link-font-size: #{map-get($link-font-size, $key)};
+				font-size: var(--link-font-size);
+			}
+		}
+	}
+}
+
+@mixin set-padding($breakpoint) {
+	@each $key, $size in $media {
+		@if $breakpoint ==$key {
+			.title-container,
+			.subtitle-line, 
+			.about-link {
+				--title-container-padding: #{map-get($title-container-padding, $key)};
+				padding: var(--title-container-padding);
+			}
+		}
+	}
+}

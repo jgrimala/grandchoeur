@@ -1,0 +1,19 @@
+// _light.scss
+body {
+	@include theme-colors('light');
+}
+
+:root.light {
+	
+	--primary: #{$light-primary};
+	--background: #{$light-background};
+	--surface: #{$light-surface};
+	--secondary: #{$light-secondary};
+	--text: #{$light-text};
+	--muted-text: #{$light-muted-text};
+	--border: #{$light-border};
+	--accent: #{$light-accent};
+	--hover-primary: #{$light-hover-primary};
+	--hover-secondary: #{$light-hover-secondary};
+	--hover-accent: #{$light-hover-accent};
+}

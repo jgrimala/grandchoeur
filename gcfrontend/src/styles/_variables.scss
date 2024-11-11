@@ -1,0 +1,134 @@
+///////////////////////////////////////////////////////////////////////////
+// Variable for fonts
+///////////////////////////////////////////////////////////////////////////
+
+// Font Definitions
+$font-primary: 'Roboto', sans-serif;
+$font-secondary: 'Open Sans', sans-serif;
+$font-size-base: 1rem;
+$font-size-large: 1.25rem;
+$font-size-small: 0.875rem;
+
+///////////////////////////////////////////////////////////////////////////
+// Variable for formatting
+///////////////////////////////////////////////////////////////////////////
+
+// Spacing
+$spacing-small: 0.5rem;
+$spacing-medium: 1rem;
+$spacing-large: 1.5rem;
+
+// Border Radius
+$border-radius-small: 0.25rem;
+$border-radius-large: 0.5rem;
+
+///////////////////////////////////////////////////////////////////////////
+// Variable for colors
+///////////////////////////////////////////////////////////////////////////
+
+// Light Theme Variables
+$light-primary: #29c7d9;
+$light-background: #ffffff;
+$light-surface: #f5f5f5;
+$light-secondary: #d9d9d9;
+$light-text: #404040;
+$light-muted-text: #737373;
+$light-border: #e0e0e0;
+$light-accent: #ff91a4;
+
+// Additional shades for light theme
+$light-primary-light: mix($light-primary, #ffffff, 20%);
+$light-primary-dark: mix($light-primary, #000000, 10%);
+$light-secondary-light: mix($light-secondary, #ffffff, 15%);
+$light-secondary-dark: mix($light-secondary, #000000, 10%);
+$light-accent-light: mix($light-accent, #ffffff, 20%);
+$light-accent-dark: mix($light-accent, #000000, 15%);
+$light-muted-text-light: mix($light-muted-text, #ffffff, 15%);
+$light-background-dark: mix($light-background, #000000, 5%);
+$light-hover-primary: mix($light-primary, #000000, 5%);
+$light-hover-secondary: mix($light-secondary, #000000, 5%);
+$light-hover-accent: mix($light-accent, #000000, 5%);
+
+// Dark Theme Variables
+$dark-primary: #29c7d9;
+$dark-background: #0d0d0d;
+$dark-surface: #1a1a1a;
+$dark-secondary: #404040;
+$dark-text: #d9d9d9;
+$dark-muted-text: #737373;
+$dark-border: #333333;
+$dark-accent: #ff91a4;
+
+// Additional shades for dark theme
+$dark-primary-light: mix($dark-primary, #ffffff, 15%);
+$dark-primary-dark: mix($dark-primary, #000000, 10%);
+$dark-secondary-light: mix($dark-secondary, #ffffff, 10%);
+$dark-secondary-dark: mix($dark-secondary, #000000, 10%);
+$dark-accent-light: mix($dark-accent, #ffffff, 15%);
+$dark-accent-dark: mix($dark-accent, #000000, 15%);
+$dark-muted-text-light: mix($dark-muted-text, #ffffff, 20%);
+$dark-background-light: mix($dark-background, #ffffff, 5%);
+$dark-hover-primary: mix($dark-primary, #ffffff, 5%);
+$dark-hover-secondary: mix($dark-secondary, #ffffff, 5%);
+$dark-hover-accent: mix($dark-accent, #ffffff, 5%);
+
+
+///////////////////////////////////////////////////////////////////////////
+// Variable for breakpoints
+///////////////////////////////////////////////////////////////////////////
+// $breakpoint-sm: 440px;
+// $breakpoint-md: 768px;
+// $breakpoint-lg: 1024px;
+// $breakpoint-xl: 1440px;
+// $breakpoint-xxl: 1920px;
+
+// Breakpoint map
+$media: (
+sm: 380px,
+md: 768px,
+lg: 1024px,
+xl: 1440px,
+xxl: 1920px
+);
+
+// Font size variables for each breakpoint
+$title-font-size: (
+  sm: 2rem,
+  md: 2rem,
+  lg: 3rem,
+  xl: 4rem,
+  xxl: 5rem
+);
+
+$subline-font-size: (
+  sm: 3rem,
+  md: 3rem,
+  lg: 4rem,
+  xl: 5rem,
+  xxl: 7rem
+);
+
+$subtitle-font-size: (
+  sm: 1.3rem,
+  md: 1.4rem,
+  lg: 1.6rem,
+  xl: 1.8rem,
+  xxl: 2rem
+);
+
+$link-font-size: (
+  sm: 1.3rem,
+  md: 1.4rem,
+  lg: 1.6rem,
+  xl: 1.8rem,
+  xxl: 2rem
+);
+
+$title-container-padding: (
+  sm: 0.6rem 1.4rem, 
+  md: 0.6rem 1.4rem, 
+  lg: 0.6rem 4rem 0.6rem 8rem, 
+  xl: 0.8rem 4rem 0.8rem 12rem,
+  xxl: 0.8rem 4rem 0.8rem 18rem
+);
+

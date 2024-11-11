@@ -1,0 +1,32 @@
+// @import 'variables';
+// @import 'mixins';
+
+@each $key, $size in $media {
+	@media (min-width: #{$size}) {
+	  @include set-font-size(#{$key});
+	  @include set-padding(#{$key});
+
+	  //if key is md or sm, .left-section: 100%, else unset width.
+	  // if key is md or sm, set .left-section width to 100%, else unset width.
+	  .left-section, .title-container, .subtitle-line, .action-links-box {
+	    @if $key == 'md' or $key == 'sm' {
+	      width: 100%;
+	    } @else {
+	      width: unset;
+	    }
+	  }
+	}
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+

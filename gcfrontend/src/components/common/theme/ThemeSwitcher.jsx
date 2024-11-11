@@ -2,6 +2,8 @@
  * ThemeSwitcher.jsx
  * src/components/common/theme/ThemeSwitcher.jsx
  */
+
+// ThemeSwitcher.jsx
 import React, { useContext } from "react";
 import { ThemeContext } from "../../../context/ThemeContext";
 
@@ -10,11 +12,12 @@ const ThemeSwitcher = () => {
 
     const toggleTheme = () => {
         const newTheme = theme === "light" ? "dark" : "light";
+        console.log("Switching to:", newTheme);
         setTheme(newTheme);
     };
 
-    return (
-        <button onClick={toggleTheme}>
+    return (	
+        <button className="nav-link" onClick={toggleTheme}>
             {theme === "light" ? "Dark Mode" : "Light Mode"}
         </button>
     );
