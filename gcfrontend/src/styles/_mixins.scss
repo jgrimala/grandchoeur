@@ -1,6 +1,7 @@
 // Button Styles
 @mixin button-style($bg-color: var(--primary),
-	$text-color: var(--text),
+	$text-color: var(--text-color), // Updated to use the new text color variable
+
 	$padding: $spacing-medium $spacing-large,
 	$border-radius: $border-radius-small) {
 	background-color: $bg-color;
@@ -12,7 +13,7 @@
 	transition: background-color 0.3s ease;
 
 	&:hover {
-		background-color: var(--hover-primary); // Use a predefined hover color variable
+		background-color: var(--hover-primary); // Updated to use the new hover primary color variable
 	}
 }
 
@@ -33,7 +34,7 @@
 // Card Styles
 @mixin card-style($padding: $spacing-medium,
 	$border-radius: $border-radius-small) {
-	background-color: var(--surface);
+	background-color: var(--surface); // Updated to use the new surface variable
 	padding: $padding;
 	border-radius: $border-radius;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -47,7 +48,7 @@
 	th,
 	td {
 		padding: $padding;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border); // Updated to use the new border variable
 	}
 }
 
@@ -55,7 +56,7 @@
 @mixin input-style($padding: $spacing-small,
 	$border-radius: $border-radius-small) {
 	padding: $padding;
-	border: 1px solid var(--border);
+	border: 1px solid var(--border); // Updated to use the new border variable
 	border-radius: $border-radius;
 }
 
@@ -78,37 +79,53 @@
 	}
 }
 
+// Theme Colors
+// Corrected theme-colors mixin
 @mixin theme-colors($theme) {
 	@if $theme =='light' {
-		--primary: #{$light-primary};
-		--background: #{$light-background};
-		--surface: #{$light-surface};
-		--secondary: #{$light-secondary};
-		--text: #{$light-text};
-		--muted-text: #{$light-muted-text};
-		--border: #{$light-border};
-		--accent: #{$light-accent};
-		--hover-primary: #{$light-hover-primary};
-		--hover-secondary: #{$light-hover-secondary};
-		--hover-accent: #{$light-hover-accent};
+		.light {
+			--background-primary: #{$light-background};
+			--background-secondary: #{$dark-background};
+
+			--surface-primary: #{$light-surface};
+			--surface-secondary: #{$dark-surface};
+
+			--text-color-primary: #{$light-text};
+			--text-color-secondary: #{$dark-text};
+
+			--muted-text: #{$light-muted-text};
+			--border: #{$light-accent};
+			--accent: #{$light-accent};
+			--hover-primary: #{$light-hover-primary};
+
+			--border-on-dark: 1px solid var(--border);
+			--border-on-light: none;
+		}
 	}
 
 	@else if $theme =='dark' {
-		--primary: #{$dark-primary};
-		--background: #{$dark-background};
-		--surface: #{$dark-surface};
-		--secondary: #{$dark-secondary};
-		--text: #{$dark-text};
-		--muted-text: #{$dark-muted-text};
-		--border: #{$dark-border};
-		--accent: #{$dark-accent};
-		--hover-primary: #{$dark-hover-primary};
-		--hover-secondary: #{$dark-hover-secondary};
-		--hover-accent: #{$dark-hover-accent};
+		.dark {
+			--background-primary: #{$dark-background};
+			--background-secondary: #{$light-background};
+
+			--surface-primary: #{$dark-surface};
+			--surface-secondary: #{$light-surface};
+
+			--text-color-primary: #{$dark-text};
+			--text-color-secondary: #{$light-text};
+
+			--muted-text: #{$dark-muted-text};
+			--border: #{$dark-accent};
+			--accent: #{$dark-accent};
+			--hover-primary: #{$dark-hover-primary};
+			--border-on-dark: none;
+			--border-on-light: 1px solid var(--border);
+		}
 	}
 }
 
-// Declare mixins at the top level
+
+// Font Size Mixins
 @mixin set-font-size($breakpoint) {
 	@each $key, $size in $media {
 		@if $breakpoint ==$key {
@@ -135,11 +152,13 @@
 	}
 }
 
+// Padding Mixins
 @mixin set-padding($breakpoint) {
 	@each $key, $size in $media {
 		@if $breakpoint ==$key {
+
 			.title-container,
-			.subtitle-line, 
+			.subtitle-line,
 			.about-link {
 				--title-container-padding: #{map-get($title-container-padding, $key)};
 				padding: var(--title-container-padding);

@@ -1,3 +1,5 @@
+// _variables.scss
+
 ///////////////////////////////////////////////////////////////////////////
 // Variable for fonts
 ///////////////////////////////////////////////////////////////////////////
@@ -27,60 +29,44 @@ $border-radius-large: 0.5rem;
 ///////////////////////////////////////////////////////////////////////////
 
 // Light Theme Variables
-$light-primary: #29c7d9;
-$light-background: #ffffff;
-$light-surface: #f5f5f5;
-$light-secondary: #d9d9d9;
-$light-text: #404040;
-$light-muted-text: #737373;
-$light-border: #e0e0e0;
-$light-accent: #ff91a4;
+// Light Theme Variables
+$light-background: #ffffff; 
+$light-surface: #f5f5f5; 
+$light-text: #404040; 
+$light-muted-text: #737373; 
+$light-border: #e0e0e0; 
 
-// Additional shades for light theme
-$light-primary-light: mix($light-primary, #ffffff, 20%);
-$light-primary-dark: mix($light-primary, #000000, 10%);
-$light-secondary-light: mix($light-secondary, #ffffff, 15%);
-$light-secondary-dark: mix($light-secondary, #000000, 10%);
-$light-accent-light: mix($light-accent, #ffffff, 20%);
-$light-accent-dark: mix($light-accent, #000000, 15%);
-$light-muted-text-light: mix($light-muted-text, #ffffff, 15%);
+// Accent Colors (used sparingly for borders, hover effects, and icons)
+$light-accent: #ff91a4;
+$light-hover-primary: #ff91a4; 
+//$light-hover-secondary: #29c7d9; 
+
+// Additional Shades (used for subtle variations)
 $light-background-dark: mix($light-background, #000000, 5%);
-$light-hover-primary: mix($light-primary, #000000, 5%);
-$light-hover-secondary: mix($light-secondary, #000000, 5%);
-$light-hover-accent: mix($light-accent, #000000, 5%);
+$light-muted-text-light: mix($light-muted-text, #ffffff, 15%);
+
 
 // Dark Theme Variables
-$dark-primary: #29c7d9;
-$dark-background: #0d0d0d;
-$dark-surface: #1a1a1a;
-$dark-secondary: #404040;
-$dark-text: #d9d9d9;
-$dark-muted-text: #737373;
-$dark-border: #333333;
-$dark-accent: #ff91a4;
+$dark-background: #0d0d0d; 
+$dark-surface: #1a1a1a; 
+$dark-text: #d9d9d9; 
+$dark-muted-text: #737373; 
+$dark-border: #333333; 
 
-// Additional shades for dark theme
-$dark-primary-light: mix($dark-primary, #ffffff, 15%);
-$dark-primary-dark: mix($dark-primary, #000000, 10%);
-$dark-secondary-light: mix($dark-secondary, #ffffff, 10%);
-$dark-secondary-dark: mix($dark-secondary, #000000, 10%);
-$dark-accent-light: mix($dark-accent, #ffffff, 15%);
-$dark-accent-dark: mix($dark-accent, #000000, 15%);
-$dark-muted-text-light: mix($dark-muted-text, #ffffff, 20%);
+// Accent Colors (used sparingly for borders, hover effects, and icons)
+$dark-accent: #29c7d9; 
+$dark-hover-primary: #29c7d9; 
+//$dark-hover-secondary: #ff91a4; 
+
+// Additional Shades (used for subtle variations)
 $dark-background-light: mix($dark-background, #ffffff, 5%);
-$dark-hover-primary: mix($dark-primary, #ffffff, 5%);
-$dark-hover-secondary: mix($dark-secondary, #ffffff, 5%);
-$dark-hover-accent: mix($dark-accent, #ffffff, 5%);
+$dark-muted-text-light: mix($dark-muted-text, #ffffff, 20%);
+
 
 
 ///////////////////////////////////////////////////////////////////////////
 // Variable for breakpoints
 ///////////////////////////////////////////////////////////////////////////
-// $breakpoint-sm: 440px;
-// $breakpoint-md: 768px;
-// $breakpoint-lg: 1024px;
-// $breakpoint-xl: 1440px;
-// $breakpoint-xxl: 1920px;
 
 // Breakpoint map
 $media: (

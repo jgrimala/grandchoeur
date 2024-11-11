@@ -1,7 +1,3 @@
-// src/styles/_header.scss
-
-@import 'variables';
-@import 'mixins';
 
 .header {
   position: fixed; // Keep the header fixed at the top of the page
@@ -10,7 +6,7 @@
   width: 100%;
   padding: $spacing-medium;
   background-color: transparent !important; // No background for header
-  color: var(--text);
+  color: var(--text-color); // Use the correct text color variable from your theme
   z-index: 1000; // Ensure the header is above other content
 
   .navigation {
@@ -33,8 +29,8 @@
 
   .nav-link {
     text-decoration: none;
-    color: var(--text); // Use a light color that's readable over any potential background content
-    font-size: 1.5rem; // Larger font size for accessibility (suitable for older viewers)
+    color: var(--text-color); // Use the correct text color variable
+    font-size: 1.5rem; // Larger font size for accessibility
     font-weight: bold;
     transition: color 0.3s ease;
     text-transform: uppercase;
@@ -43,7 +39,7 @@
     cursor: pointer;
 
     &:hover {
-      color: var(--accent); // Highlight color on hover for better interactivity
+      color: var(--accent); // Use the correct accent color variable for hover
     }
 
     &:focus,

@@ -3,51 +3,54 @@
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+	position: relative;
 	background-size: cover;
 	background-position: center;
-	position: relative;
-	color: var(--text-color);
+	color: var(--text-color-primary); // Use the correct text color variable
   
 	.left-section {
-	  max-width: 100%;
 	  display: flex;
 	  flex-direction: column;
 	  justify-content: center;
 	  position: relative;
+	  max-width: 100%;
 	  z-index: 2;
 	  margin-bottom: 6rem;
-	  /* Consider removing or adjusting white-space */
-	  
+  
 	  .title-container {
+		float: left;
+		clear: left;
 		max-width: 100%;
-		opacity: 0.8;
-		background-color: #dee8fa;
-		padding: var(--title-container-padding);
 		margin-bottom: 2rem;
-		/* Use flexbox instead of float/clear if possible */
-		display: block;
+		padding: var(--title-container-padding); 
+		background-color: var(--surface-primary); 
+		opacity: 0.8;
+		border: var(--border-on-light);
   
 		.line {
+		  display: block;
 		  width: max-content;
-		  font-size: var(--title-font-size);
-		  color: rgba(8, 16, 35, 0.8);
 		  text-align: left;
+		  font-size: var(--title-font-size); 
+		  color: var(--text-color-primary); 
   
 		  .subline {
-			font-size: var(--subline-font-size);
 			font-weight: bold;
+			font-size: var(--subline-font-size); 
 		  }
 		}
 	  }
   
 	  .subtitle-line {
-		background-color: rgba(18, 28, 32, 0.9);
-		border: #068db6 1px solid;
-		border-left: 0;
-		color: #dbdee9;
-		padding: var(--title-container-padding);
+		float: left;
+		clear: left;
+		margin-bottom: 0;
+		padding: var(--title-container-padding); 
+		background-color: var(--surface-secondary); 
+		color: var(--text-color-secondary); 
+		font-size: var(--subtitle-font-size); 
 		opacity: 0.8;
-		font-size: var(--subtitle-font-size);
+		border: var(--border-on-dark);
 	  }
   
 	  .action-links-container {
@@ -56,11 +59,18 @@
 		align-items: flex-start;
 		gap: 6rem;
 		opacity: 0.8;
-  
+		color: var(--text-color-secondary);
+
+		.theme-icon {
+			color: var(--accent); // Use the text color variable for the theme
+			vertical-align: middle; // Align the icon vertically to the middle
+			position: relative;
+			bottom: 0.1rem;
+		  }
+
 		.action-links-box {
-		  background-color: rgba(18, 28, 32, 0.8);
-		  border: #068db6 1px solid;
-		  border-left: 0;
+		  background-color: var(--surface-secondary);
+		  border: var(--border-on-dark);
 		}
   
 		.action-links-mail {
@@ -68,19 +78,20 @@
 		}
   
 		.about-link {
+		  float: left;
+		  clear: left;
+		  display: inline-block;
 		  margin: 0;
-		  display: block;
-		  opacity: 0.8;
-		  background-color: rgba(18, 28, 32, 0.9);
-		  color: #eceef3;
-		  font-size: var(--link-font-size);
-		  cursor: pointer;
+		  background-color: var(--surface); // Use the surface color variable
+		  color: var(--text-color); // Use the text color variable
+		  font-size: var(--link-font-size); // Use the link font size variable
 		  text-decoration: none;
-		  transition: all 0.3s ease;
+		  cursor: pointer;
 		  border: none;
+		  opacity: 0.8;
   
 		  &:hover {
-			color: #068db6;
+			color: var(--accent); // Use the accent color variable for hover
 		  }
   
 		  .my-icon {
@@ -89,13 +100,13 @@
 		}
   
 		.email-link {
-		  color: #eceef3;
+		  color: var(--text-color); // Use the text color variable
 		  text-decoration: underline;
 		  cursor: pointer;
 		  opacity: 0.8;
   
 		  &:hover {
-			color: var(--accent-color);
+			color: var(--accent); // Use the accent color variable for hover
 		  }
 		}
 	  }

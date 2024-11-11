@@ -45,7 +45,7 @@ const Home = () => {
 				<div className="action-links-container">
 					<div className="action-links-box">
 					<a href="/about" onClick={handleAboutClick} className="about-link">
-						En savoir <FontAwesomeIcon icon={faPlus} className="my-icon" />
+						En savoir <FontAwesomeIcon icon={faPlus} className="my-icon theme-icon" />
 					</a>
 					</div>
 					{/* <div className="action-links-mail">
