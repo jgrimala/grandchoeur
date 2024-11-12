@@ -1,3 +1,4 @@
+// styles/_mixins.scss
 // Button Styles
 @mixin button-style($bg-color: var(--primary),
 	$text-color: var(--text-color), // Updated to use the new text color variable
@@ -124,33 +125,32 @@
 	}
 }
 
-
 // Font Size Mixins
 @mixin set-font-size($breakpoint) {
 	@each $key, $size in $media {
-		@if $breakpoint ==$key {
-			.line {
-				--title-font-size: #{map-get($title-font-size, $key)};
-				font-size: var(--title-font-size);
-
-				.subline {
-					--subline-font-size: #{map-get($subline-font-size, $key)};
-					font-size: var(--subline-font-size);
-				}
-			}
-
-			.subtitle-line {
-				--subtitle-font-size: #{map-get($subtitle-font-size, $key)};
-				font-size: var(--subtitle-font-size);
-			}
-
-			.about-link {
-				--link-font-size: #{map-get($link-font-size, $key)};
-				font-size: var(--link-font-size);
-			}
+	  @if $breakpoint == $key {
+		.line {
+		  --title-font-size: #{map-get($title-font-size, $key)};
+		  font-size: var(--title-font-size);
+  
+		  .subline {
+			--subline-font-size: #{map-get($subline-font-size, $key)};
+			font-size: var(--subline-font-size);
+		  }
 		}
+  
+		.subtitle-line {
+		  --subtitle-font-size: #{map-get($subtitle-font-size, $key)};
+		  font-size: var(--subtitle-font-size);
+		}
+  
+		.about-link {
+		  --link-font-size: #{map-get($link-font-size, $key)};
+		  font-size: var(--link-font-size);
+		}
+	  }
 	}
-}
+  }
 
 // Padding Mixins
 @mixin set-padding($breakpoint) {

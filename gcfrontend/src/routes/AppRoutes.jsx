@@ -1,4 +1,4 @@
-import React from 'react';
+// /routes/AppRoutes.jsx
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from '../components/pages/Home';
 import DashboardPage from '../components/pages/DashboardPage';

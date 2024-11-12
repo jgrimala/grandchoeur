@@ -54,11 +54,11 @@
 }
 @media (min-width: 1024px) {
   .line {
-    --title-font-size: 3rem;
+    --title-font-size: 5rem;
     font-size: var(--title-font-size);
   }
   .line .subline {
-    --subline-font-size: 4rem;
+    --subline-font-size: 6rem;
     font-size: var(--subline-font-size);
   }
   .subtitle-line {
@@ -81,11 +81,11 @@
 }
 @media (min-width: 1440px) {
   .line {
-    --title-font-size: 4rem;
+    --title-font-size: 5rem;
     font-size: var(--title-font-size);
   }
   .line .subline {
-    --subline-font-size: 5rem;
+    --subline-font-size: 7rem;
     font-size: var(--subline-font-size);
   }
   .subtitle-line {
@@ -108,11 +108,11 @@
 }
 @media (min-width: 1920px) {
   .line {
-    --title-font-size: 5rem;
+    --title-font-size: 7rem;
     font-size: var(--title-font-size);
   }
   .line .subline {
-    --subline-font-size: 7rem;
+    --subline-font-size: 9rem;
     font-size: var(--subline-font-size);
   }
   .subtitle-line {
@@ -212,16 +212,19 @@
 }
 
 .home-page {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
   height: 100vh;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  position: relative;
   background-size: cover;
   background-position: center;
   color: var(--text-color-primary);
 }
 .home-page .left-section {
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -229,6 +232,7 @@
   max-width: 100%;
   z-index: 2;
   margin-bottom: 6rem;
+  padding: var(--title-container-padding);
 }
 .home-page .left-section .title-container {
   float: left;
@@ -252,7 +256,10 @@
   font-weight: bold;
   font-size: var(--subline-font-size);
 }
-.home-page .left-section .subtitle-line {
+.home-page .left-section .subtitle {
+  margin-top: 30px;
+}
+.home-page .left-section .subtitle .subtitle-line {
   float: left;
   clear: left;
   margin-bottom: 0;
@@ -271,6 +278,7 @@
   gap: 6rem;
   opacity: 0.8;
   color: var(--text-color-secondary);
+  margin-top: 30px;
 }
 .home-page .left-section .action-links-container .theme-icon {
   color: var(--accent);
@@ -318,32 +326,49 @@
 .header {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   padding: 1rem;
-  background-color: transparent !important;
-  color: var(--text-color);
-  z-index: 1000;
-  opacity: 0.7;
-}
-.header .navigation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.header .nav-list {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-  padding: 0;
-  margin: 0;
+  padding-right: unset;
   background-color: transparent;
-  align-items: center;
-  background-color: var(--surface-secondary);
-  color: var(--text-color-secondary);
-  padding: 10px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
 }
-.header .nav-link {
+.header .header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.header .header-content .navigation-container {
+  font-family: "Roboto", sans-serif;
+  font-size: var(--title-font-size);
+  font-weight: bold;
+  width: fit-content;
+}
+.header .header-content .navigation-container .logo {
+  text-decoration: none;
+  color: var(--text-color);
+}
+.header .header-content .navigation-container .logo:hover {
+  color: var(--accent);
+}
+.header .header-content .top-navigation {
+  display: flex;
+}
+.header .header-content .top-navigation .nav-list {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  padding: 15px 0;
+  margin: 0 30px;
+}
+.header .header-content .top-navigation .nav-list .nav-item {
+  margin-left: 1.5rem;
+}
+.header .header-content .top-navigation .nav-list .nav-item .nav-link {
   text-decoration: none;
   color: var(--text-color);
   font-size: 1.5rem;
@@ -354,12 +379,62 @@
   background: transparent;
   cursor: pointer;
 }
-.header .nav-link:hover {
+.header .header-content .top-navigation .nav-list .nav-item .nav-link:hover {
   color: var(--accent);
 }
-.header .nav-link:focus, .header .nav-link:active {
+.header .header-content .top-navigation .nav-list .nav-item .nav-link:focus, .header .header-content .top-navigation .nav-list .nav-item .nav-link:active {
   outline: none;
   background: transparent;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100%;
+  background-color: var(--surface-secondary);
+  color: var(--text-color-secondary);
+  transition: right 0.3s ease-in-out;
+  z-index: 1001;
+}
+.sidebar.open {
+  right: 0;
+}
+.sidebar .sidebar-content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+.sidebar .sidebar-content .close-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--text-color-secondary);
+}
+.sidebar .sidebar-content .close-button:hover {
+  color: var(--accent);
+}
+.sidebar .sidebar-content .sidebar-nav {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar .sidebar-content .sidebar-nav .sidebar-item {
+  font-family: "Roboto", sans-serif;
+  font-size: var(--link-font-size);
+  color: var(--text-color-secondary);
+  text-decoration: none;
+  margin-bottom: 1rem;
+}
+.sidebar .sidebar-content .sidebar-nav .sidebar-item:hover {
+  color: var(--accent);
 }
 
 /*# sourceMappingURL=main.css.map */

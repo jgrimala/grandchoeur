@@ -1,14 +1,18 @@
+// src/styles/_home.scss
 .home-page {
+	width: 100%; // Ensure the home page does not overflow
+    overflow-x: hidden; // Hide any horizontal overflow
+    position: relative;
 	height: 100vh;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	position: relative;
 	background-size: cover;
 	background-position: center;
 	color: var(--text-color-primary); // Use the correct text color variable
   
 	.left-section {
+	 max-width: 100%;
 	  display: flex;
 	  flex-direction: column;
 	  justify-content: center;
@@ -16,7 +20,8 @@
 	  max-width: 100%;
 	  z-index: 2;
 	  margin-bottom: 6rem;
-  
+	  padding: var(--title-container-padding);
+
 	  .title-container {
 		float: left;
 		clear: left;
@@ -41,19 +46,22 @@
 		  }
 		}
 	  }
-  
-	  .subtitle-line {
-		float: left;
-		clear: left;
-		margin-bottom: 0;
-		padding: var(--title-container-padding); 
-		background-color: var(--surface-secondary); 
-		color: var(--text-color-secondary); 
-		font-size: var(--subtitle-font-size); 
-		opacity: 0.8;
-		border: var(--border-on-dark);
-		border-left: none;
-	  }
+  	.subtitle {
+		margin-top: 30px;
+		.subtitle-line {
+			float: left;
+			clear: left;
+			margin-bottom: 0;
+			padding: var(--title-container-padding); 
+			background-color: var(--surface-secondary); 
+			color: var(--text-color-secondary); 
+			font-size: var(--subtitle-font-size); 
+			opacity: 0.8;
+			border: var(--border-on-dark);
+			border-left: none;
+		  }
+	}
+	  
   
 	  .action-links-container {
 		display: flex;
@@ -62,6 +70,7 @@
 		gap: 6rem;
 		opacity: 0.8;
 		color: var(--text-color-secondary);
+		margin-top: 30px;
 
 		.theme-icon {
 			color: var(--accent); // Use the text color variable for the theme
