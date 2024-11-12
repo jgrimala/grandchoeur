@@ -26,6 +26,7 @@
 		background-color: var(--surface-primary); 
 		opacity: 0.8;
 		border: var(--border-on-light);
+		border-left: none;
   
 		.line {
 		  display: block;
@@ -51,6 +52,7 @@
 		font-size: var(--subtitle-font-size); 
 		opacity: 0.8;
 		border: var(--border-on-dark);
+		border-left: none;
 	  }
   
 	  .action-links-container {
@@ -71,6 +73,7 @@
 		.action-links-box {
 		  background-color: var(--surface-secondary);
 		  border: var(--border-on-dark);
+		  border-left: none;
 		}
   
 		.action-links-mail {
@@ -82,7 +85,7 @@
 		  clear: left;
 		  display: inline-block;
 		  margin: 0;
-		  background-color: var(--surface); // Use the surface color variable
+		  background-color: var(--surface-secondary); // Use the surface color variable
 		  color: var(--text-color); // Use the text color variable
 		  font-size: var(--link-font-size); // Use the link font size variable
 		  text-decoration: none;

@@ -1,5 +1,6 @@
 
 .header {
+
   position: fixed; // Keep the header fixed at the top of the page
   top: 0;
   left: 0;
@@ -8,13 +9,13 @@
   background-color: transparent !important; // No background for header
   color: var(--text-color); // Use the correct text color variable from your theme
   z-index: 1000; // Ensure the header is above other content
+  opacity: 0.7;
 
   .navigation {
     display: flex;
     justify-content: center; // Center the navigation items
     align-items: center;
-    background-color: transparent !important; // No background for the navigation area
-    width: 100%;
+
   }
 
   .nav-list {
@@ -25,6 +26,9 @@
     margin: 0;
     background-color: transparent; // Ensure no background
     align-items: center;
+	background-color: var(--surface-secondary);
+	color: var(--text-color-secondary);
+	padding: 10px;
   }
 
   .nav-link {

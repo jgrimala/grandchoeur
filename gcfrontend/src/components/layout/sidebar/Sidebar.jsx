@@ -10,22 +10,7 @@ const Sidebar = () => {
 
   return (
     <div>
-      <ul>
-        {isAuthenticated ? (
-          <>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/shows">Shows</Link></li>
-            <li><Link to="/scores">My Scores</Link></li>
-            <li><Link to="/chorists">Chorists</Link></li>
-            {isAdmin ? <li><Link to="/feature-flags">Feature Flags</Link></li> : null}
-          </>
-        ) : (
-          <>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/shows">Shows</Link></li>
-          </>
-        )}
-      </ul>
+     
     </div>
   );
 };
