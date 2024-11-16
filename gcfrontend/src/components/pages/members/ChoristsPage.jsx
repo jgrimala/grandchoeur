@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { fetchChoirMembers, updateDisplayContact } from '../../services/ChoirMemberService';
-import { useAuth } from "../../context/AuthContext"; // Ensure you import useAuth to get the user context
-
+import { fetchChoirMembers, updateDisplayContact } from '../../../services/ChoirMemberService';
+import { useAuth } from "../../../context/AuthContext"; 
 const ChoristsPage = ({ isAdmin }) => {
   const [chorists, setChorists] = useState([]);
   const [error, setError] = useState("");
-  const { user } = useAuth(); // Get the authenticated user
-
+  const { user } = useAuth(); 
   useEffect(() => {
     const fetchChorists = async () => {
       try {

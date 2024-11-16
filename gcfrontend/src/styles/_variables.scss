@@ -5,11 +5,22 @@
 ///////////////////////////////////////////////////////////////////////////
 
 // Font Definitions
-$font-primary: 'Roboto', sans-serif;
-$font-secondary: 'Open Sans', sans-serif;
-$font-size-base: 1rem;
-$font-size-large: 1.25rem;
-$font-size-small: 0.875rem;
+$font-primary: 'operetta-52', sans-serif;           // For headings
+$font-secondary: 'contralto-big', sans-serif;    // For body text
+$font-fallback: sans-serif;                      // General fallback
+
+// Font Sizes
+$font-size-base: 1rem;        // Base font size for body text
+$font-size-large: 1.25rem;    // Large text
+$font-size-small: 0.875rem;   // Small text
+
+// Font Weights
+$font-weight-normal: 400;
+$font-weight-bold: 700;       // Use standard weights for compatibility
+
+// Font Styles
+$font-style-normal: normal;
+$font-style-italic: italic;
 
 ///////////////////////////////////////////////////////////////////////////
 // Variable for formatting
@@ -29,38 +40,49 @@ $border-radius-large: 0.5rem;
 ///////////////////////////////////////////////////////////////////////////
 
 // Light Theme Variables
-// Light Theme Variables
-$light-background: #ffffff; 
-$light-surface: #f5f5f5; 
-$light-text: #404040; 
-$light-muted-text: #737373; 
-$light-border: #e0e0e0; 
+$light-background: #f5f5f5;
+$light-background-opacity-1: rgba($light-background, 0.6);
+$light-background-opacity-2: rgba($light-background, 0.8);
+$light-surface: #f5f5f5;
+$light-text: #424141;
+$light-text-secondary: #f5f5f5;
+$light-muted-text: #737373;
+$light-border: #e0e0e0;
 
-// Accent Colors (used sparingly for borders, hover effects, and icons)
+// Accent Colors
 $light-accent: #ff91a4;
-$light-hover-primary: #ff91a4; 
-//$light-hover-secondary: #29c7d9; 
+$light-hover-primary: #ff91a4;
+$light-text-accent: #ff91a4;
+$light-text-accent-l: #fcabb8; // New: Accent color for text
+$light-text-accent-d: #df7b8b; // New: Accent color for text
+$light-accent-background-opacity: rgba($light-accent, 0.8); // New: Lighter accent background with 0.8 opacity
 
 // Additional Shades (used for subtle variations)
 $light-background-dark: mix($light-background, #000000, 5%);
-$light-muted-text-light: mix($light-muted-text, #ffffff, 15%);
+$light-muted-text-light: mix($light-muted-text, #f5f5f5, 15%);
 
 
 // Dark Theme Variables
-$dark-background: #0d0d0d; 
-$dark-surface: #1a1a1a; 
-$dark-text: #d9d9d9; 
-$dark-muted-text: #737373; 
-$dark-border: #333333; 
+$dark-background: #0d0d0d;
+$dark-background-opacity-1: rgba($dark-background, 0.5);
+$dark-background-opacity-2: rgba($dark-background, 0.8);
+$dark-surface: #1a1a1a;
+$dark-text: #f5f5f5;
+$dark-text-secondary: #424141;
+$dark-muted-text: #737373;
+$dark-border: #424141;
 
-// Accent Colors (used sparingly for borders, hover effects, and icons)
-$dark-accent: #29c7d9; 
-$dark-hover-primary: #29c7d9; 
-//$dark-hover-secondary: #ff91a4; 
+// Accent Colors
+$dark-accent: #29c7d9;
+$dark-hover-primary: #29c7d9;
+$dark-text-accent: #29c7d9;
+$dark-text-accent-l: #6ad0db; // New: Accent color for text
+$dark-text-accent-d: #1b94a1; // New: Accent color for text
+$dark-accent-background-opacity: rgba($dark-accent, 0.8); // New: Lighter accent background with 0.8 opacity
 
 // Additional Shades (used for subtle variations)
-$dark-background-light: mix($dark-background, #ffffff, 5%);
-$dark-muted-text-light: mix($dark-muted-text, #ffffff, 20%);
+$dark-background-light: mix($dark-background, #f5f5f5, 5%);
+$dark-muted-text-light: mix($dark-muted-text, #f5f5f5, 20%);
 
 
 

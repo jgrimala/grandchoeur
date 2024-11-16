@@ -1,127 +1,69 @@
-// src/styles/_home.scss
+// styles/_home.scss
+
 .home-page {
-	width: 100%; // Ensure the home page does not overflow
-    overflow-x: hidden; // Hide any horizontal overflow
-    position: relative;
+	width: 100%;
+	overflow-x: hidden;
+	position: relative;
 	height: 100vh;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 	background-size: cover;
 	background-position: center;
-	color: var(--text-color-primary); // Use the correct text color variable
-  
-	.left-section {
-	 max-width: 100%;
-	  display: flex;
-	  flex-direction: column;
-	  justify-content: center;
-	  position: relative;
-	  max-width: 100%;
-	  z-index: 2;
-	  margin-bottom: 6rem;
-	  padding: var(--title-container-padding);
+	color: var(--text-color-primary);
 
-	  .title-container {
-		float: left;
-		clear: left;
+	.left-section {
 		max-width: 100%;
-		margin-bottom: 2rem;
-		padding: var(--title-container-padding); 
-		background-color: var(--surface-primary); 
-		opacity: 0.8;
-		border: var(--border-on-light);
-		border-left: none;
-  
-		.line {
-		  display: block;
-		  width: max-content;
-		  text-align: left;
-		  font-size: var(--title-font-size); 
-		  color: var(--text-color-primary); 
-  
-		  .subline {
-			font-weight: bold;
-			font-size: var(--subline-font-size); 
-		  }
-		}
-	  }
-  	.subtitle {
-		margin-top: 30px;
-		.subtitle-line {
-			float: left;
-			clear: left;
-			margin-bottom: 0;
-			padding: var(--title-container-padding); 
-			background-color: var(--surface-secondary); 
-			color: var(--text-color-secondary); 
-			font-size: var(--subtitle-font-size); 
-			opacity: 0.8;
-			border: var(--border-on-dark);
-			border-left: none;
-		  }
-	}
-	  
-  
-	  .action-links-container {
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
-		gap: 6rem;
-		opacity: 0.8;
-		color: var(--text-color-secondary);
-		margin-top: 30px;
+		justify-content: center;
+		align-items: flex-start; // Ensure children don't stretch
+		position: relative;
+		z-index: 2;
+		margin-bottom: 6rem;
+		padding: var(--title-container-padding);
 
-		.theme-icon {
-			color: var(--accent); // Use the text color variable for the theme
-			vertical-align: middle; // Align the icon vertically to the middle
-			position: relative;
-			bottom: 0.1rem;
-		  }
-
-		.action-links-box {
-		  background-color: var(--surface-secondary);
-		  border: var(--border-on-dark);
-		  border-left: none;
-		}
-  
-		.action-links-mail {
-		  margin-left: 18rem;
-		}
-  
+		.title-container,
+		.subtitle,
+		.action-links-box,
 		.about-link {
-		  float: left;
-		  clear: left;
-		  display: inline-block;
-		  margin: 0;
-		  background-color: var(--surface-secondary); // Use the surface color variable
-		  color: var(--text-color); // Use the text color variable
-		  font-size: var(--link-font-size); // Use the link font size variable
-		  text-decoration: none;
-		  cursor: pointer;
-		  border: none;
-		  opacity: 0.8;
-  
-		  &:hover {
-			color: var(--accent); // Use the accent color variable for hover
-		  }
-  
-		  .my-icon {
-			margin-right: 1.2rem;
-		  }
+			color: var(--text-color-primary);
+			background-color: var(--background-primary-opacity-2);
+			border: var(--border);
+			border-top: none;
+			border-right: none;
+			border-left: none;
 		}
-  
-		.email-link {
-		  color: var(--text-color); // Use the text color variable
-		  text-decoration: underline;
-		  cursor: pointer;
-		  opacity: 0.8;
-  
-		  &:hover {
-			color: var(--accent); // Use the accent color variable for hover
-		  }
+
+		.title-container {
+			@include typography('heading');
+			font-size: var(--title-font-size);
+			display: block; // Ensure it starts on a new line
+			width: fit-content; // Wrap container tightly around content
+			margin-bottom: 2rem;
+			padding: var(--title-container-padding);
+			
+			.line {
+				display: block;
+				text-align: left;
+				font-size: var(--title-font-size);
+
+				.subline {
+					font-weight: bold;
+					font-size: var(--subline-font-size);
+				}
+			}
 		}
-	  }
+
+		.subtitle {
+			margin-top: 30px;
+			align-self: flex-start;
+
+			.subtitle-line {
+				margin-bottom: 0;
+				padding: var(--title-container-padding);
+				font-size: var(--subtitle-font-size);
+			}
+		}
 	}
-  }
-  
+}

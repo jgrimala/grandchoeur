@@ -1,14 +1,30 @@
 // _typography.scss
-@import 'mixins';
+body {
+	@include typography('body');
+	color: var(--text-color-primary); // Ensure text color is set
+  }
+  
+  // Headings
+  h1, .heading {
+	@include typography('heading');
+  }
+  
+  h2, .subheading {
+	@include typography('heading');
+	font-size: $font-size-base * 1.5; // Adjust as needed
+  }
+  
+  // Small Text
+  .small-text {
+	@include typography('small');
+  }
 
-.heading {
-  @include typography('heading');
-}
-
-.body-text {
-  @include typography('body');
-}
-
-.small-text {
-  @include typography('small');
-}
+  a {
+	color: var(--link-color);
+	text-decoration: none;
+  
+	&:hover {
+	  text-decoration: underline;
+	  color: var(--link-hover-color);
+	}
+  }

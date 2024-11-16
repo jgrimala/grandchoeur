@@ -1,0 +1,167 @@
+// src/styles/_modal.scss
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--background-primary);
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    border-radius: 5px;
+    width: 500px;
+    max-width: 90%;
+    position: relative;
+    text-align: center;
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color-primary);
+
+    &:hover {
+        color: var(--accent);
+    }
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding-bottom: 1rem;
+    color: var(--text-color-accent-d);
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    width: 100%;
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text-color-primary);
+        font-size: 1.2rem;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        font-size: 1.1rem;
+        color: var(--text-color-primary);
+        background-color: var(--surface-primary);
+        transition: border-color 0.3s ease;
+
+        &:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+    }
+
+    // Placeholder styling for <input>
+    input::placeholder {
+        color: var(--text-color-accent-l);
+    }
+
+    // Styling for <select> to apply placeholder-like color
+    select {
+        color: var(--text-color-primary);
+
+        // Placeholder-like option styling
+        option[value=""] {
+            color: var(--text-color-accent-l);
+        }
+    }
+}
+
+
+.form-group-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    width: 100%;
+
+    .form-label {
+        color: var(--text-color-primary);
+        font-size: 1.2rem;
+        margin-right: 1rem;
+        width: 40%;
+        text-align: left;
+    }
+
+    .uniform-width-inputs {
+        flex: 1;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        font-size: 1.1rem;
+        color: var(--text-color-primary);
+        background-color: var(--surface-primary);
+        transition: border-color 0.3s ease;
+
+        &:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+		option[value=""] {
+			color: var(--text-color-accent-l);
+		}
+
+    }
+}
+// Add extra spacing below the "Full Name" input
+.form-group.phone-group {
+	margin-bottom: 4rem; // Increase the margin to add more space
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .modal-button {
+        background-color: var(--accent);
+        color: var(--text-color-secondary);
+        border: var(--border);
+        padding: 0.75rem 1.5rem;
+        margin: 2rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: var(--background-primary);
+            color: var(--hover-primary);
+            border: var(--border);
+        }
+    }
+}
+
+.link-text {
+    color: var(--accent);
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: $spacing-small;
+
+    &:hover {
+        color: var(--hover-primary);
+    }
+}

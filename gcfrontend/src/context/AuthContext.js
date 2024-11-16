@@ -21,11 +21,11 @@ export const AuthProvider = ({ children }) => {
 			if (response.data.success) {
 				const token = response.data.data.token;
 				const decodedToken = jwtDecode(token);
-				const user = decodedToken.data; // Extract the nested data object
-				console.log("Decoded User:", user); // Add this line to log the decoded user
-				setUser(user); // Save user details to state
-				localStorage.setItem("token", token); // Save the token to localStorage
-				navigate("/dashboard"); // Use navigate to redirect
+				const user = decodedToken.data; 
+				console.log("Decoded User:", user); 
+				setUser(user);
+				localStorage.setItem("token", token); 
+				//navigate("/dashboard"); 
 			} else {
 				throw new Error(
 					response.data.message || "Login failed with no success flag."

@@ -7,7 +7,7 @@ import { useAuth } from '../../../context/AuthContext';
 
 const Sidebar = ({ isOpen, toggleSidebar, isAuthenticated, isAdmin }) => {
   const { t } = useTranslation();
-
+  const { user, logout } = useAuth();
   return (
     <div className={`sidebar ${isOpen ? 'open' : ''}`} onClick={toggleSidebar}>
       <div className="sidebar-content" onClick={(e) => e.stopPropagation()}>
@@ -18,34 +18,66 @@ const Sidebar = ({ isOpen, toggleSidebar, isAuthenticated, isAdmin }) => {
           <Link to="/about" className="sidebar-item" onClick={toggleSidebar}>
             {t('About')}
           </Link>
-          <Link to="/shows" className="sidebar-item" onClick={toggleSidebar}>
-            {t('Shows')}
+		  <Link to="/chef" className="sidebar-item" onClick={toggleSidebar}>
+            André Pappathomas
           </Link>
-          {isAuthenticated && (
-            <Link to="/chorists" className="sidebar-item" onClick={toggleSidebar}>
-              {t('Choristes')}
-            </Link>
-          )}
-          {isAdmin && (
+		  <Link to="/staff" className="sidebar-item" onClick={toggleSidebar}>
+            {t('Staff')}
+          </Link>
+		  <Link to="/bells" className="sidebar-item" onClick={toggleSidebar}>
+            {t('Bells')}
+          </Link>
+		  <Link to="/join-us" className="sidebar-item" onClick={toggleSidebar}>
+            {t('JoinUs')}
+          </Link>
+		  <Link to="/next-events" className="sidebar-item" onClick={toggleSidebar}>
+            {t('nextEvents')}
+          </Link>
+          <Link to="/past-shows" className="sidebar-item" onClick={toggleSidebar}>
+            {t('PastShows')}
+          </Link>
+		  <Link to="media-contact" className="sidebar-item" onClick={toggleSidebar}>
+            {t('MediaContact')}
+          </Link>
+		  {user && (
             <>
-              <Link to="/admin" className="sidebar-item" onClick={toggleSidebar}>
-                {t('Admin')}
-              </Link>
-              <Link to="/dashboard" className="sidebar-item" onClick={toggleSidebar}>
-                {t('Dashboard')}
-              </Link>
+              {/* <Link
+                to="/chorists"
+                className="sidebar-item"
+                onClick={toggleSidebar}
+              >
+                {t("Chorists")}
+              </Link> */}
+              {/* {user.is_admin && (
+                <Link
+                  to="/admin"
+                  className="sidebar-item"
+                  onClick={toggleSidebar}
+                >
+                  {t("Admin")}
+                </Link>
+              )} */}
+              {/* <button
+                className="sidebar-item"
+                onClick={() => {
+                  toggleSidebar();
+                  logout();
+                  navigate("/");
+                }}
+              >
+                {t("Logout")}
+              </button> */}
             </>
           )}
-          {/* Authentication Links */}
-          {!isAuthenticated ? (
-            <Link to="/login" className="sidebar-item" onClick={toggleSidebar}>
-              {t('Login')}
+          {/* {!user && (
+            <Link
+              to="/login"
+              className="sidebar-item"
+              onClick={toggleSidebar}
+            >
+              {t("Login")}
             </Link>
-          ) : (
-            <Link to="/" className="sidebar-item" onClick={() => { toggleSidebar(); logout(); }}>
-              {t('Logout')}
-            </Link>
-          )}
+          )} */}
         </nav>
       </div>
     </div>

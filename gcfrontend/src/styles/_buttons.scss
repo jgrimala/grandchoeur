@@ -1,19 +1,29 @@
 // _buttons.scss
-
 .button-primary {
 	@include button-style(
-		var(--primary),
-		var(--text),
-		$spacing-medium $spacing-large,
-		$border-radius-small);
-}
-
-.button-secondary {
-	@include button-style(--secondary, #fff);
-}
-
-.button-outlined {
-	background-color: transparent;
-	color: --primary;
-	border: 1px solid --primary;
-}
+	  $bg-color: var(--primary),
+	  $text-color: var(--text),
+	  $padding: $spacing-medium $spacing-large,
+	  $border-radius: $border-radius-small
+	);
+  }
+  
+  .button-secondary {
+	@include button-style(
+	  $bg-color: var(--secondary),
+	  $text-color: #fff,
+	  $padding: $spacing-medium $spacing-large,
+	  $border-radius: $border-radius-small
+	);
+  }
+  
+  .button-outlined {
+	@include button-style(
+	  $bg-color: transparent,
+	  $text-color: var(--primary),
+	  $padding: $spacing-medium $spacing-large,
+	  $border-radius: $border-radius-small,
+	  $border: 1px solid var(--primary)
+	);
+  }
+  

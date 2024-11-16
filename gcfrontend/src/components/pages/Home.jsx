@@ -1,6 +1,8 @@
 // src/components/pages/Home.jsx
-import React from "react";
+import React, { useContext } from "react";
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../../context/ThemeContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faArrowRight,
@@ -10,24 +12,30 @@ import {
 
 const Home = () => {
 	const navigate = useNavigate();
-
+	const { theme } = useContext(ThemeContext); 
+	const { t } = useTranslation();
 	const handleAboutClick = (e) => {
 		e.preventDefault();
 		navigate("/about"); // Navigate to the "About" page
 	};
 
+	const backgroundImageUrl =
+    theme === "light"
+      ? "/assets/images/GC_redish_tint.jpg"
+      : "/assets/images/GC_blueish_tint2.jpg";
+
 	return (
 		<div
 			className="home-page"
 			style={{
-				backgroundImage: `url('/assets/images/choir_color_splash_04.jpg')`,
-			}} // Retaining background image here
+				backgroundImage: `url('${backgroundImageUrl}')`,
+			}} 
 		>
 			<div className="left-section">
 				<h1 className="main-heading">
 					<div className="title-container">
 						<span className="line">
-							Le <span className="subline">Grand Choeur</span>
+							Le <span className="subline">Grand Chœur</span>
 						</span>
 					</div>
 					<div className="title-container">
@@ -38,22 +46,9 @@ const Home = () => {
 				</h1>
 				<h2 className="subtitle">
 					<div className="subtitle-line">
-						Une chorale communautaire originale de Montréal
+						{t('Header Subtitle')}
 					</div>
 				</h2>
-
-				<div className="action-links-container">
-					<div className="action-links-box">
-					<a href="/about" onClick={handleAboutClick} className="about-link">
-						En savoir <FontAwesomeIcon icon={faPlus} className="my-icon theme-icon" />
-					</a>
-					</div>
-					{/* <div className="action-links-mail">
-					<a href="mailto:cinqgrandescloches@gmail.com" className="email-link">
-						<FontAwesomeIcon icon={faEnvelope} className="email-icon" />
-					</a>
-					</div> */}
-				</div>
 			</div>
 		</div>
 	);
