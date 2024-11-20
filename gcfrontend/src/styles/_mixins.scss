@@ -4,28 +4,27 @@
 // 	$text-color: var(--text-color), // Updated to use the new text color variable
 
 // Button Styles
-@mixin button-style(
-  $bg-color: null,
-  $text-color: null,
-  $padding: null,
-  $border-radius: null,
-  $border: null
-) {
-background-color: if($bg-color != null, $bg-color, var(--primary));
-color: if($text-color != null, $text-color, var(--text-color-primary));
-padding: if($padding != null, $padding, $spacing-medium $spacing-large);
-border-radius: if($border-radius != null, $border-radius, $border-radius-small);
-border: if($border != null, $border, none);
-cursor: pointer;
-font-size: 1.2rem; // Larger font size
-transition: background-color 0.3s ease, color 0.3s ease;
+@mixin button-style($bg-color: null,
+	$text-color: null,
+	$padding: null,
+	$border-radius: null,
+	$border: null) {
+	background-color: if($bg-color !=null, $bg-color, var(--primary));
+	color: if($text-color !=null, $text-color, var(--text-color-primary));
+	padding: if($padding !=null, $padding, $spacing-medium $spacing-large);
+	border-radius: if($border-radius !=null, $border-radius, $border-radius-small);
+	border: if($border !=null, $border, none);
+	cursor: pointer;
+	font-size: 1.2rem; // Larger font size
+	transition: background-color 0.3s ease, color 0.3s ease;
 
-&:hover {
-  background-color: var(--hover-primary);
-  color: var(--light-text-accent); // New: Accent color for text on hover
-}
+	&:hover {
+		background-color: var(--hover-primary);
+		color: var(--light-text-accent); // New: Accent color for text on hover
+	}
 
 }
+
 // Flexbox Utilities
 @mixin flex-center {
 	display: flex;
@@ -46,7 +45,7 @@ transition: background-color 0.3s ease, color 0.3s ease;
 	padding: $padding;
 	border-radius: $border-radius;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+}
 
 // Table Styles
 @mixin table-style($padding: $spacing-small) {
@@ -62,103 +61,111 @@ transition: background-color 0.3s ease, color 0.3s ease;
 
 // Input Styles
 @mixin input-style($padding: $spacing-small, $border-radius: $border-radius-small) {
-  padding: $padding;
-  border: 1px solid var(--border);
-  border-radius: $border-radius;
+	padding: $padding;
+	border: 1px solid var(--border);
+	border-radius: $border-radius;
 }
 
 // Typography Styles
 @mixin typography($type) {
-	@if $type == 'heading' {
-	  font-family: $font-primary, $font-fallback;
-	  font-size: $font-size-large;
-	  font-weight: $font-weight-bold;
-	  line-height: 1.2;
-	} @else if $type == 'body' {
-	  font-family: $font-secondary, $font-fallback;
-	  font-size: $font-size-base;
-	  font-weight: $font-weight-normal;
-	  line-height: 1.5;
-	} @else if $type == 'small' {
-	  font-family: $font-secondary, $font-fallback;
-	  font-size: $font-size-small;
-	  font-weight: $font-weight-normal;
-	  line-height: 1.4;
+	@if $type =='heading' {
+		font-family: $font-primary, $font-fallback;
+		font-size: $font-size-large;
+		font-weight: $font-weight-bold;
+		line-height: 1.2;
 	}
-  }
+
+	@else if $type =='body' {
+		font-family: $font-secondary, $font-fallback;
+		font-size: $font-size-base;
+		font-weight: $font-weight-normal;
+		line-height: 1.5;
+	}
+
+	@else if $type =='small' {
+		font-family: $font-secondary, $font-fallback;
+		font-size: $font-size-small;
+		font-weight: $font-weight-normal;
+		line-height: 1.4;
+	}
+}
 
 // Theme Colors Mixin
 @mixin theme-colors($theme) {
-	@if $theme == 'light' {
-	  .light {
-		--background-primary: #{$light-background};
-		--background-secondary: #{$dark-background};
-		--background-primary-opacity-1: #{$light-background-opacity-1};
-		--background-primary-opacity-2: #{$light-background-opacity-2};
-		--surface-primary: #{$light-surface};
-		--surface-secondary: #{$dark-surface};
-		--text-color-primary: #{$light-text};
-		--text-color-secondary: #{$dark-text};
-		--text-color-accent: #{$light-text-accent};
-		--text-color-accent-l: #{$light-text-accent-l};
-		--text-color-accent-d: #{$light-text-accent-d}; // New: Accent text color
-		--accent-background-opacity: #{$light-accent-background-opacity}; // New: Accent background with opacity
-		--muted-text: #{$light-muted-text};
-		--border-color: #{$light-accent};
-		--accent: #{$light-accent};
-		--hover-primary: #{$light-hover-primary};
-		--border: 1px solid var(--border-color);
-	  }
-	} @else if $theme == 'dark' {
-	  .dark {
-		--background-primary: #{$dark-background};
-		--background-secondary: #{$light-background};
-		--background-primary-opacity-1: #{$dark-background-opacity-1};
-		--background-primary-opacity-2: #{$dark-background-opacity-2};
-		--surface-primary: #{$dark-surface};
-		--surface-secondary: #{$light-surface};
-		--text-color-primary: #{$dark-text};
-		--text-color-secondary: #{$light-text};
-		--text-color-accent: #{$dark-text-accent}; // New: Accent text color
-		--text-color-accent-l: #{$dark-text-accent-l};
-		--text-color-accent-d: #{$dark-text-accent-d};
-		--accent-background-opacity: #{$dark-accent-background-opacity}; // New: Accent background with opacity
-		--muted-text: #{$dark-muted-text};
-		--border-color: #{$dark-accent};
-		--accent: #{$dark-accent};
-		--hover-primary: #{$dark-hover-primary};
-		--border: 1px solid var(--border-color);
-	  }
+	@if $theme =='light' {
+		.light {
+			--background-primary: #{$light-background};
+			--background-secondary: #{$dark-background};
+			--background-primary-opacity-1: #{$light-background-opacity-1};
+			--background-primary-opacity-2: #{$light-background-opacity-2};
+			--surface-primary: #{$light-surface};
+			--surface-secondary: #{$dark-surface};
+			--text-color-primary: #{$light-text};
+			--text-color-secondary: #{$dark-text};
+			--text-color-accent: #{$light-text-accent};
+			--text-color-accent-l: #{$light-text-accent-l};
+			--text-color-accent-d: #{$light-text-accent-d}; // New: Accent text color
+			--accent-background-opacity: #{$light-accent-background-opacity}; // New: Accent background with opacity
+			--muted-text: #{$light-muted-text};
+			--border-color: #{$light-accent};
+			--accent: #{$light-accent};
+			--hover-primary: #{$light-hover-primary};
+			--border: 1px solid var(--border-color);
+			--background-overlay: #{$light-background-dark};
+		}
 	}
-  }
+
+	@else if $theme =='dark' {
+		.dark {
+			--background-primary: #{$dark-background};
+			--background-secondary: #{$light-background};
+			--background-primary-opacity-1: #{$dark-background-opacity-1};
+			--background-primary-opacity-2: #{$dark-background-opacity-2};
+			--surface-primary: #{$dark-surface};
+			--surface-secondary: #{$light-surface};
+			--text-color-primary: #{$dark-text};
+			--text-color-secondary: #{$light-text};
+			--text-color-accent: #{$dark-text-accent}; // New: Accent text color
+			--text-color-accent-l: #{$dark-text-accent-l};
+			--text-color-accent-d: #{$dark-text-accent-d};
+			--accent-background-opacity: #{$dark-accent-background-opacity}; // New: Accent background with opacity
+			--muted-text: #{$dark-muted-text};
+			--border-color: #{$dark-accent};
+			--accent: #{$dark-accent};
+			--hover-primary: #{$dark-hover-primary};
+			--border: 1px solid var(--border-color);
+			--background-overlay: #{$dark-background-light};
+		}
+	}
+}
 
 // Font Size Mixins
 @mixin set-font-size($breakpoint) {
 	@each $key, $size in $media {
-	  @if $breakpoint == $key {
-		.line {
-		  --title-font-size: #{map-get($title-font-size, $key)};
-		  font-size: var(--title-font-size);
-  
-		  .subline {
-			--subline-font-size: #{map-get($subline-font-size, $key)};
-			font-size: var(--subline-font-size);
-		  }
+		@if $breakpoint ==$key {
+			.line {
+				--title-font-size: #{map-get($title-font-size, $key)};
+				font-size: var(--title-font-size);
+
+				.subline {
+					--subline-font-size: #{map-get($subline-font-size, $key)};
+					font-size: var(--subline-font-size);
+				}
+			}
+
+			.sidebar-nav,
+			.subtitle-line {
+				--subtitle-font-size: #{map-get($subtitle-font-size, $key)};
+				font-size: var(--subtitle-font-size);
+			}
+
+			.about-link {
+				--link-font-size: #{map-get($link-font-size, $key)};
+				font-size: var(--link-font-size);
+			}
 		}
-  
-		.sidebar-nav,
-		.subtitle-line {
-		  --subtitle-font-size: #{map-get($subtitle-font-size, $key)};
-		  font-size: var(--subtitle-font-size);
-		}
-  
-		.about-link {
-		  --link-font-size: #{map-get($link-font-size, $key)};
-		  font-size: var(--link-font-size);
-		}
-	  }
 	}
-  }
+}
 
 // Padding Mixins
 @mixin set-padding($breakpoint) {

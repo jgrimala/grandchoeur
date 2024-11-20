@@ -9,7 +9,7 @@ import { faCircleUser, faBars } from "@fortawesome/free-solid-svg-icons";
 import LoginModal from "../../../features/auth/components/LoginModal";
 import RegisterModal from "../../../features/auth/components/RegisterModal";
 
-const Header = ({ toggleSidebar }) => {
+const Header = ({ toggleSidebar, isSidebarOpen }) => {
 	const { t, i18n } = useTranslation();
 	const { user, logout } = useAuth();
 	const navigate = useNavigate();
@@ -23,12 +23,21 @@ const Header = ({ toggleSidebar }) => {
 	// Reference for detecting outside clicks
 	const userMenuRef = useRef(null);
 
+	// Disable menu items when sidebar is open
+	const disableMenu = isSidebarOpen
+		? { pointerEvents: "none", opacity: 0.5 }
+		: {};
+
 	useEffect(() => {
 		// Change language to 'fr' by default if not 'fr' or 'en'
 		if (i18n.language !== "fr" && i18n.language !== "en") {
 			i18n.changeLanguage("fr");
 		}
 	}, [i18n]);
+
+	const handleSidebarToggle = () => {
+		toggleSidebar(); // Toggle sidebar state
+	};
 
 	// Handle navigation
 	const handleNavigate = (path) => {
@@ -99,25 +108,43 @@ const Header = ({ toggleSidebar }) => {
 					</div>
 					<nav className="top-navigation">
 						<ul className="nav-list">
-							{/* Admin/User Icon */}
-							<li className="nav-item" ref={userMenuRef}>
-								<button onClick={handleAdminIconClick} className="nav-link">
-									<FontAwesomeIcon icon={faCircleUser} className="nav-link" />
-								</button>
-								{isUserMenuOpen && user && (
-									<div className="user-menu">
+							{/* Admin/User Icon with Welcome Message */}
+							<li className="nav-item user-section" ref={userMenuRef}>
+								{user?.userName && (
+									<div className="nav-link user-link">
+										<span className="welcome-message">
+											{t("Welcome")}, {user.userName}
+										</span>
+										<FontAwesomeIcon
+											icon={faCircleUser}
+											className="user-icon"
+										/>
+									</div>
+								)}
+								{!user?.userName && (
+									<button
+										onClick={() => setLoginModalOpen(true)}
+										className="nav-link"
+									>
+										<FontAwesomeIcon
+											icon={faCircleUser}
+											className="user-icon"
+										/>
+									</button>
+								)}
+								{user && (
+									<ul className="user-menu">
 										<ul>
 											<li>
 												<button
 													onClick={() => {
 														navigate("/profile");
-														setUserMenuOpen(false);
 													}}
 												>
 													{t("Profile")}
 												</button>
 											</li>
-											{user.is_admin && (
+											{user?.is_admin ? (
 												<li>
 													<button
 														onClick={() => {
@@ -128,21 +155,21 @@ const Header = ({ toggleSidebar }) => {
 														{t("Admin")}
 													</button>
 												</li>
-											)}
+											) : null}
 											<li>
 												<button
 													onClick={() => {
 														handleLogout();
-														setUserMenuOpen(false);
 													}}
 												>
 													{t("Logout")}
 												</button>
 											</li>
 										</ul>
-									</div>
+									</ul>
 								)}
 							</li>
+
 							{/* Language Switcher */}
 							<li className="nav-item">
 								<button onClick={changeLanguage} className="nav-link">
@@ -155,7 +182,7 @@ const Header = ({ toggleSidebar }) => {
 							</li>
 							{/* Menu Sidebar Toggle */}
 							<li className="nav-item">
-								<button className="nav-link" onClick={toggleSidebar}>
+								<button className="nav-link" onClick={handleSidebarToggle}>
 									<FontAwesomeIcon icon={faBars} className="nav-link" />
 								</button>
 							</li>
@@ -165,11 +192,17 @@ const Header = ({ toggleSidebar }) => {
 			</header>
 			{/* Login Modal */}
 			{!user && isLoginModalOpen && (
-				<LoginModal closeModal={closeModal} openRegisterModal={openRegisterModal} />
+				<LoginModal
+					closeModal={closeModal}
+					openRegisterModal={openRegisterModal}
+				/>
 			)}
 			{/* Register Modal */}
 			{!user && isRegisterModalOpen && (
-				<RegisterModal closeModal={closeModal} openLoginModal={openLoginModal} />
+				<RegisterModal
+					closeModal={closeModal}
+					openLoginModal={openLoginModal}
+				/>
 			)}
 		</>
 	);

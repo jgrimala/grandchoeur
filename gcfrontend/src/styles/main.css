@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--background-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -389,6 +389,7 @@ a:hover {
   --accent: #ff91a4;
   --hover-primary: #ff91a4;
   --border: 1px solid var(--border-color);
+  --background-overlay: rgba(41, 29, 29, 0.8);
 }
 
 .dark {
@@ -409,8 +410,10 @@ a:hover {
   --accent: #29c7d9;
   --hover-primary: #29c7d9;
   --border: 1px solid var(--border-color);
+  --background-overlay: rgba(82, 91, 92, 0.8);
 }
 
+/* src/styles/_home.scss */
 .home-page {
   width: 100%;
   overflow-x: hidden;
@@ -422,6 +425,22 @@ a:hover {
   background-size: cover;
   background-position: center;
   color: var(--text-color-primary);
+  transition: filter 0.3s ease;
+  /* Apply darkening when sidebar is open */
+  /* Optional: Add a pseudo-element to create the dark overlay effect */
+}
+.home-page.sidebar-open {
+  filter: brightness(0.5);
+}
+.home-page.sidebar-open::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Dark overlay */
+  z-index: 1; /* Make sure it is above the background but below content */
 }
 .home-page .left-section {
   max-width: 100%;
@@ -482,7 +501,7 @@ a:hover {
   padding: 1rem;
   padding-right: unset;
   background-color: transparent;
-  z-index: 1000;
+  z-index: 1001;
   display: block;
 }
 .header .header-content {
@@ -514,6 +533,7 @@ a:hover {
   padding: 15px 0;
   margin: 0 30px;
   color: #f5f5f5;
+  opacity: 1;
 }
 .header .header-content .top-navigation .nav-list .nav-item {
   margin-left: 1.5rem;
@@ -524,10 +544,13 @@ a:hover {
   font-size: 1.5rem;
   font-weight: bold;
   transition: color 0.3s ease;
-  text-transform: uppercase;
+  text-transform: none;
   border: none;
   background: transparent;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 .header .header-content .top-navigation .nav-list .nav-item .nav-link:hover {
   color: var(--accent);
@@ -536,16 +559,63 @@ a:hover {
   outline: none;
   background: transparent;
 }
+.header .header-content .top-navigation .nav-list .nav-item.user-section {
+  position: relative;
+}
+.header .header-content .top-navigation .nav-list .nav-item.user-section .user-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: transparent;
+  padding: 0.5rem 0;
+  z-index: 1001;
+  width: 100%;
+}
+.header .header-content .top-navigation .nav-list .nav-item.user-section .user-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.header .header-content .top-navigation .nav-list .nav-item.user-section .user-menu ul li {
+  background-color: var(--background-primary-opacity-2);
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  text-align: right;
+}
+.header .header-content .top-navigation .nav-list .nav-item.user-section .user-menu ul li:last-child {
+  margin-bottom: 0;
+}
+.header .header-content .top-navigation .nav-list .nav-item.user-section .user-menu ul li button {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-color-primary);
+  width: 100%;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--background-primary-opacity-2);
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+.header .header-content .top-navigation .nav-list .nav-item.user-section .user-menu ul li button:hover {
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent);
+}
+.header .header-content .top-navigation .nav-list .nav-item.user-section:hover .user-menu {
+  display: block;
+}
 
+/* src/styles/_sidebar.scss */
 .sidebar {
   position: fixed;
   top: 12rem;
-  right: -600px;
+  right: -600px; /* Adjust width as needed */
   max-width: 600px;
   height: 100%;
   color: var(--text-color-primary);
   transition: right 0.3s ease-in-out;
-  z-index: 1001;
+  z-index: 1002; /* Ensure it's above the overlay but below the header */
 }
 .sidebar.open {
   right: 0;
@@ -590,9 +660,50 @@ a:hover {
   border-top: none;
   border-right: none;
   border-left: none;
+  cursor: pointer; /* Ensure pointer cursor on hover */
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 .sidebar .sidebar-content .sidebar-nav .sidebar-item:hover {
   color: var(--accent);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 10, 10, 0.8); /* Semi-transparent black */
+  z-index: 1000; /* Ensure it appears above the main content but below the sidebar */
+  cursor: pointer; /* Allow closing the sidebar when clicking the overlay */
+}
+
+.app-body {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  /* Add reduced opacity when the sidebar is open */
+}
+.app-body.sidebar-open {
+  pointer-events: none; /* Prevent interaction with underlying content */
+}
+
+.main-content {
+  flex-grow: 1;
+  transition: opacity 0.3s ease; /* Smooth transition when dimming content */
 }
 
 /*# sourceMappingURL=main.css.map */

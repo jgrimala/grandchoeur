@@ -10,10 +10,11 @@ import {
 	faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Home = () => {
+const Home = ({ sidebarOpen }) => {
 	const navigate = useNavigate();
 	const { theme } = useContext(ThemeContext); 
 	const { t } = useTranslation();
+
 	const handleAboutClick = (e) => {
 		e.preventDefault();
 		navigate("/about"); // Navigate to the "About" page
@@ -31,6 +32,7 @@ const Home = () => {
 				backgroundImage: `url('${backgroundImageUrl}')`,
 			}} 
 		>
+			{!sidebarOpen && (
 			<div className="left-section">
 				<h1 className="main-heading">
 					<div className="title-container">
@@ -50,6 +52,7 @@ const Home = () => {
 					</div>
 				</h2>
 			</div>
+			  )}
 		</div>
 	);
 };

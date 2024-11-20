@@ -1,4 +1,4 @@
-// styles/_home.scss
+/* src/styles/_home.scss */
 
 .home-page {
 	width: 100%;
@@ -11,59 +11,78 @@
 	background-size: cover;
 	background-position: center;
 	color: var(--text-color-primary);
-
-	.left-section {
-		max-width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: flex-start; // Ensure children don't stretch
-		position: relative;
-		z-index: 2;
-		margin-bottom: 6rem;
-		padding: var(--title-container-padding);
-
-		.title-container,
-		.subtitle,
-		.action-links-box,
-		.about-link {
-			color: var(--text-color-primary);
-			background-color: var(--background-primary-opacity-2);
-			border: var(--border);
-			border-top: none;
-			border-right: none;
-			border-left: none;
-		}
-
-		.title-container {
-			@include typography('heading');
-			font-size: var(--title-font-size);
-			display: block; // Ensure it starts on a new line
-			width: fit-content; // Wrap container tightly around content
-			margin-bottom: 2rem;
-			padding: var(--title-container-padding);
-			
-			.line {
-				display: block;
-				text-align: left;
-				font-size: var(--title-font-size);
-
-				.subline {
-					font-weight: bold;
-					font-size: var(--subline-font-size);
-				}
-			}
-		}
-
-		.subtitle {
-			margin-top: 30px;
-			align-self: flex-start;
-
-			.subtitle-line {
-				margin-bottom: 0;
-				padding: var(--title-container-padding);
-				font-size: var(--subtitle-font-size);
-			}
-		}
+	transition: filter 0.3s ease; // Smooth transition for the darkening effect
+  
+	/* Apply darkening when sidebar is open */
+	&.sidebar-open {
+	  filter: brightness(0.5); // Darkens the image when sidebar is open
 	}
-}
+  
+	/* Optional: Add a pseudo-element to create the dark overlay effect */
+	&.sidebar-open::before {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background: rgba(0, 0, 0, 0.7); /* Dark overlay */
+	  z-index: 1; /* Make sure it is above the background but below content */
+	}
+  
+	.left-section {
+	  max-width: 100%;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  align-items: flex-start; // Ensure children don't stretch
+	  position: relative;
+	  z-index: 2; // Ensure this is above the darkened image
+	  margin-bottom: 6rem;
+	  padding: var(--title-container-padding);
+  
+	  .title-container,
+	  .subtitle,
+	  .action-links-box,
+	  .about-link {
+		color: var(--text-color-primary);
+		background-color: var(--background-primary-opacity-2);
+		border: var(--border);
+		border-top: none;
+		border-right: none;
+		border-left: none;
+	  }
+  
+	  .title-container {
+		@include typography('heading');
+		font-size: var(--title-font-size);
+		display: block; // Ensure it starts on a new line
+		width: fit-content; // Wrap container tightly around content
+		margin-bottom: 2rem;
+		padding: var(--title-container-padding);
+		
+		.line {
+		  display: block;
+		  text-align: left;
+		  font-size: var(--title-font-size);
+  
+		  .subline {
+			font-weight: bold;
+			font-size: var(--subline-font-size);
+		  }
+		}
+	  }
+  
+	  .subtitle {
+		margin-top: 30px;
+		align-self: flex-start;
+  
+		.subtitle-line {
+		  margin-bottom: 0;
+		  padding: var(--title-container-padding);
+		  font-size: var(--subtitle-font-size);
+		}
+	  }
+	}
+  }
+  

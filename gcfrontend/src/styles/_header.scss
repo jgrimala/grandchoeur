@@ -5,18 +5,15 @@
 	padding: $spacing-medium;
 	padding-right: unset;
 	background-color: transparent;
-	z-index: 1000;
+	z-index: 1001;
 	display: block;
-	// flex-direction: column;
-	// justify-content: space-between;
-	// align-items: flex-start;
+
 
 	.header-content {
 		display: flex;
-		justify-content: space-between; // Ensures elements are pushed to the extremities
+		justify-content: space-between;
 		align-items: center;
-		width: 100%; // Make sure it spans the full width of the header
-		// padding: 0 $spacing-medium; // Add horizontal padding to the left and right
+		width: 100%;
 
 		.navigation-container {
 			font-family: $font-primary;
@@ -36,36 +33,96 @@
 
 		.top-navigation {
 			display: flex;
+
 			.nav-list {
 				display: flex;
-				justify-content: flex-end; // Pushes navigation items to the right
+				justify-content: flex-end;
 				list-style: none;
 				padding: 15px 0;
 				margin: 0 30px;
 				color: $dark-text;
+				opacity: 1;
 
 				.nav-item {
 					margin-left: $spacing-large;
 
 					.nav-link {
 						text-decoration: none;
-						color: var(--text-color); // Use the correct text color variable
-						font-size: 1.5rem; // Larger font size for accessibility
+						color: var(--text-color);
+						font-size: 1.5rem;
 						font-weight: bold;
 						transition: color 0.3s ease;
-						text-transform: uppercase;
+						text-transform: none;
 						border: none;
-						background: transparent; // Remove any background color from buttons
+						background: transparent;
 						cursor: pointer;
-					
+						display: flex;
+						align-items: center;
+						gap: $spacing-small;
+
 						&:hover {
-						  color: var(--accent); // Use the correct accent color variable for hover
+							color: var(--accent);
 						}
-					
+
 						&:focus,
 						&:active {
-						  outline: none;
-						  background: transparent; // Ensure transparency on focus and active states
+							outline: none;
+							background: transparent;
+						}
+					}
+
+					&.user-section {
+						position: relative;
+
+						.user-menu {
+							display: none;
+							position: absolute;
+							top: 100%;
+							right: 0;
+							background-color: transparent; // Transparent background for the menu
+							padding: $spacing-small 0; // Add padding to create spacing around `li`
+							z-index: 1001;
+							width: 100%; // Match width of user link
+
+							ul {
+								list-style: none;
+								padding: 0;
+								margin: 0;
+
+								li {
+									background-color: var(--background-primary-opacity-2); // Background for each item
+									margin-bottom: $spacing-small; // Add empty space between items
+									// padding: $spacing-small;
+									transition: color 0.3s ease, background-color 0.3s ease;
+									text-align: right;
+
+									&:last-child {
+										margin-bottom: 0; // Remove margin from last item
+									}
+
+									button {
+										background: none;
+										border: none;
+										font-size: 1.3rem; // Larger font size
+										font-weight: 700;
+										color: var(--text-color-primary);
+										width: 100%; // Ensure button spans full width
+										cursor: pointer;
+										padding: $spacing-small;
+										border-bottom: 1px solid var(--background-primary-opacity-2);
+										transition: color 0.3s ease, border-bottom 0.3s ease;
+
+										&:hover {
+											color: var(--accent);
+											border-bottom: 1px solid var(--accent); // Add border-bottom effect
+										}
+									}
+								}
+							}
+						}
+
+						&:hover .user-menu {
+							display: block;
 						}
 					}
 				}

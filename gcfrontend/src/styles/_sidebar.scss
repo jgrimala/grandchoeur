@@ -1,65 +1,65 @@
-// styles/_sidebar.scss
+/* src/styles/_sidebar.scss */
 
 .sidebar {
-	position: fixed;
-	top: 12rem;
-	right: -600px; // Adjust width as needed
-	max-width: 600px;
-	height: 100%;
-	//background-color: var(--background-primary-opacity-2);
-	color: var(--text-color-primary);
-	transition: right 0.3s ease-in-out;
-	z-index: 1001;
+  position: fixed;
+  top: 12rem;
+  right: -600px; /* Adjust width as needed */
+  max-width: 600px;
+  height: 100%;
+  color: var(--text-color-primary);
+  transition: right 0.3s ease-in-out;
+  z-index: 1002; /* Ensure it's above the overlay but below the header */
 
-	&.open {
-		right: 0;
-	}
+  &.open {
+    right: 0;
+  }
 
-	.sidebar-content {
-		position: relative;
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		padding: $spacing-medium 0 $spacing-medium $spacing-medium;
+  .sidebar-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-medium 0 $spacing-medium $spacing-medium;
 
-		.close-button {
-			position: absolute;
-			top: $spacing-small;
-			right: $spacing-small;
-			background: none;
-			border: none;
-			font-size: 2rem;
-			cursor: pointer;
+    .close-button {
+      position: absolute;
+      top: $spacing-small;
+      right: $spacing-small;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
 
-			&:hover {
-				color: var(--accent);
-			}
-		}
+      &:hover {
+        color: var(--accent);
+      }
+    }
 
-		.sidebar-nav {
-			margin-top: $spacing-large;
-			display: flex;
-			flex-direction: column;
-			align-items: flex-end;
+    .sidebar-nav {
+      margin-top: $spacing-large;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
 
-			.sidebar-item {
-				@include typography('heading'); // Use heading typography
-				font-size: var(--subtitle-font-size); 
-				//color: var(--text-color-secondary);
-				color: var(--text-color-primary);
-				text-decoration: none;
-				margin-bottom: 2rem;
-				padding: $spacing-large 10rem $spacing-large $spacing-large;
-				background-color: var(--background-primary-opacity-2);
-				border: var(--border);
-				border-top: none;
-				border-right: none;
-				border-left: none;
+      .sidebar-item {
+        @include typography('heading'); // Use heading typography
+        font-size: var(--subtitle-font-size); 
+        color: var(--text-color-primary);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        padding: $spacing-large 10rem $spacing-large $spacing-large;
+        background-color: var(--background-primary-opacity-2);
+        border: var(--border);
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        cursor: pointer; /* Ensure pointer cursor on hover */
+        transition: color 0.3s ease, background-color 0.3s ease;
 
-				&:hover {
-					color: var(--accent);
-				}
-			}
-		}
-	}
+        &:hover {
+          color: var(--accent);
+        }
+      }
+    }
+  }
 }
